@@ -1,0 +1,39 @@
+#header {
+    background: #2c3e50;
+    min-height: 100px;
+}
+
+#header h1 {
+    color: #bdc3c7;
+}
+
+#highlight-header {
+    color: #c0392b;
+}
+
+#side-nav {
+    background: #34495e;
+    min-height: 100%;
+}
+
+#content {
+    background: #bdc3c7;
+    min-height: 100%;
+}
+
+#login-group {
+    padding: 30px;
+}
+
+#username {
+    width: 30%;
+}
+
+#password {
+    width: 30%;
+}
+
+#content span a {
+    padding-left: 120px;
+    text-decoration: none;
+}
