@@ -66,7 +66,7 @@
     
 #content table{
      height:300px; 
-     display: -moz-groupbox;    
+     display: -moz-groupbox;
 }
 
 #content tbody{
@@ -78,9 +78,6 @@
 
 #content td {
     font-size: 15px;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-bottom: 1px solid;
 }
 
 #content thead {
