@@ -57,7 +57,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login | The PETMALU Hotel Admin</title>
+    <title>Home | The PETMALU Hotel Admin</title>
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/bootstrap.css">
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
@@ -78,34 +78,35 @@
     }
 
     if($username === $user && $password === $pass) {
-        header("Location: home.php");
+        header("Location: confirmation.php");
     }else {
     }
 
     ?>
+    
     <div id="header" class="col-sm-12">
         <div class="container-fluid">
             <h1>The <span id="highlight-header">PETMALU</span> Hotel Admin</h1>
         </div>
     </div>
     <div id="side-nav" class="col-sm-2">
-
+        <div class="">
+            <div class="navigation" id="navigation">
+                <center>
+                <ul>
+                    <li><a href="home.php">Home</a></li>
+                    <li><a href="booking.php">Bookings</a></li>
+                    <li><a href="confirmation.php">Confirmation</a></li>
+                    <li><a href="room.php">Room</a></li>
+                    <li><a href="">Logout</a></li>
+                </ul>
+                </center>
+            </div>
+        </div>
     </div>
     <div id="content" class="col-sm-10">
         <div class="container-fluid">
-            <h2>Login</h2>
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="login-group">
-                <div class="form-group">
-                    <label for="username">Username: </label>
-                    <input type="text" class="form-control" name="username" id="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password: </label>
-                    <input type="password" class="form-control" name="password" id="password">
-                </div>
-                <button type="submit" class="btn btn-default">Login</button>
-                <span><a href="">forgot password?</a></span>
-            </form>
+            
         </div>
     </div>
 
