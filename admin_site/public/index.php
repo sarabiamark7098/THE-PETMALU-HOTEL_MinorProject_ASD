@@ -78,7 +78,8 @@
     }
 
     if($username === $user && $password === $pass) {
-        header("Location: sampleoutput.php");
+        header("Location: confirmation.php");
+    }else {
     }
 
     ?>
