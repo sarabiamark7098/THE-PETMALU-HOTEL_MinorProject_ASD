@@ -120,7 +120,7 @@
                                     <td style='font-size: 12px;'>N/A</td>
                                     <td style='font-size: 12px;'>N/A</td>
                                     <td>
-                                    <a href='edit.php?id={$id}&firstname={$firstname}&lastname={$lastname}' class='btn btn-default'>Edit</a>
+                                    <a href='edit.php?id={$id}&firstname={$firstname}&lastname={$lastname}&middle={$middle_Initial}&address={$address}' class='btn btn-default'>Edit</a>
                                     <a href='delete.php?id={$id}' class='btn btn-default'>Delete</a>
                                     </td>";
                                 }
