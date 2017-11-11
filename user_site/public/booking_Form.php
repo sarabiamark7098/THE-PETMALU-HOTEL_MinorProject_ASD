@@ -31,10 +31,16 @@
             <form action="avail_room.php" class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <label for="checkin" class="control-label"><h2><span class="label">Check in: </span></h2></label><input type="date" name="checkin" class="form-control input-lg">
+                        <label for="checkin" class="control-label">
+                            <h2><span class="label">Check in: </span></h2>
+                        </label>
+                        <input type="date" name="checkin" class="form-control input-lg">
                     </div>
                     <div class="col-sm-5">
-                        <label for="checkout" class="control-label"><h2><span class="label">Check out: </span></h2></label><input type="date" name="checkout" class="form-control input-lg">
+                        <label for="checkout" class="control-label">
+                            <h2><span class="label">Check out: </span>
+                        </h2></label>
+                        <input type="date" name="checkout" class="form-control input-lg">
                     </div>
                     <div class="col-sm-6">
                         <br><br>
