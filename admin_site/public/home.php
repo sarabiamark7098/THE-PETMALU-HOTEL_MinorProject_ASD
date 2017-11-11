@@ -94,11 +94,11 @@
             <div class="navigation" id="navigation">
                 <center>
                 <ul>
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="booking.php">Bookings</a></li>
-                    <li><a href="confirmation.php">Confirmation</a></li>
-                    <li><a href="room.php">Room</a></li>
-                    <li><a href="">Logout</a></li>
+                    <li><a href="home.php"><img src="images/Home_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Home</a></li>
+                    <li><a href="booking.php"><img src="images/Booking_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Bookings</a></li>
+                    <li><a href="confirmation.php"><img src="images/Checked_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Confirmation</a></li>
+                    <li><a href="room.php"><img src="images/Room_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Room</a></li>
+                    <li><a href=""><img src="images/Logout Rounded Up_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Logout</a></li>
                 </ul>
                 </center>
             </div>
