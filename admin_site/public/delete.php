@@ -16,7 +16,15 @@
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
         if(isset($_GET['id'])){
-            $id = $_GET['id'];
+            $id = test_input($_GET['id']);
+
+            $query = "DELETE FROM guest WHERE guest_id = {$id}";
+            $result = mysqli_query($connection, $query);
+        
+            if(result) {
+                header("Location: booking.php");
+            }
+        
         }
     }
 
@@ -25,13 +33,6 @@
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
-    }
-
-    $query = "DELETE FROM guest WHERE guest_id = {$id}";
-    $result = mysqli_query($connection, $query);
-
-    if(result) {
-        header("Location: booking.php");
     }
 
     mysqli_close($connection);

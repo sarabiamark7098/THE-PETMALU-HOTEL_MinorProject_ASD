@@ -99,15 +99,15 @@
                                 //3. Use return data (if any)
                                 while($row = mysqli_fetch_assoc($result)) {
                                     //output data from each row
-                                    $id = $row['guest_id'];
-                                    $firstname = $row['firstname'];
-                                    $lastname = $row['lastname'];
-                                    $middle_Initial = $row['middle_Initial'];
+                                    $id = test_input($row['guest_id']);
+                                    $firstname = test_input($row['firstname']);
+                                    $lastname = test_input($row['lastname']);
+                                    $middle_Initial = test_input($row['middle_Initial']);
                                     $guest_name = $firstname . "<br>" . $middle_Initial . ".<br>" . $lastname;
-                                    $address = $row['address'];
+                                    $address = test_input($row['address']);
                                     $contact_no = test_input($row['contact_no']);
                                     $email_add =  test_input($row['email_address']);
-                                    $mail = $row['mail'];
+                                    $mail = test_input($row['mail']);
 
                                     echo "<tr><td style='font-size: 12px;'>". $id ."</td>
                                     <td style='font-size: 12px;'>". $guest_name ."</td>
@@ -120,7 +120,13 @@
                                     <td style='font-size: 12px;'>N/A</td>
                                     <td style='font-size: 12px;'>N/A</td>
                                     <td>
-                                    <a href='edit.php?id={$id}&firstname={$firstname}&lastname={$lastname}&middle={$middle_Initial}&address={$address}' class='btn btn-default'>Edit</a>
+                                    <a href='edit.php?
+                                    id={$id}&
+                                    firstname={$firstname}&
+                                    lastname={$lastname}&
+                                    middle={$middle_Initial}&
+                                    address={$address}&
+                                    contact={$contact_no}&' class='btn btn-default'>Edit</a>
                                     <a href='delete.php?id={$id}' class='btn btn-default'>Delete</a>
                                     </td>";
                                 }

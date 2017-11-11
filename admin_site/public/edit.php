@@ -66,11 +66,29 @@ if(!$result) {
 
         if($_SERVER["REQUEST_METHOD"] == "GET") {
             if(isset($_GET['id'])){
-                $id = $_GET['id'];
+                $id = test_input($_GET['id']);
+            }
+
+            if(isset($_GET['firstname'])){
+                $firstname = test_input($_GET['firstname']);
+            }
+
+            if(isset($_GET['lastname'])){
+                $lastname = test_input($_GET['lastname']);
+            }
+
+            if(isset($_GET['middle'])){
+                $middle_Initial = test_input($_GET['middle']);
+            }
+
+            if(isset($_GET['address'])){
+                $address = test_input($_GET['address']);
+            }
+
+            if(isset($_GET['contact'])){
+                $contact_no = test_input($_GET['contact']);
             }
         }
-
-        echo "The id is " . $id;
 
         function test_input($data) {
             $data = trim($data);
@@ -80,7 +98,36 @@ if(!$result) {
         }
     ?>
 
-    <form action=""></form>
+<div>
+<div class="col-sm-6" style="background: #bdc3c7; height: 100%; padding-top: 10px;">
+    <h1 class="container-fluid">Update</h1>
+    <p id="required" class="container-fluid"></p>
+    <form action="update.php" class="container-fluid" method="get">
+        <div class="form-group">
+            <label for="firstname"><span id="required"></span> First name:</label>
+            <input type="text" name="firstname" value="<?php echo $firstname;?>" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="lastname"><span id="required"></span> Last name:</label>
+            <input type="text" name="lastname" value="<?php echo $lastname;?>" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="middleinitial"><span id="required"></span> Middle Initial:</label>
+            <input type="text" name="middle_Initial" value="<?php echo $middle_Initial;?>" class="form-control" style="width: 10%;">
+        </div>
+        <div class="form-group">
+            <label for="address"><span id="required"></span> Address: </label>
+            <input type="text" name="address" value="<?php echo $address;?>" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="contact-no"><span id="required"></span> Contact Number: </label>
+            <input type="text" name="contact_no" value="<?php echo $contact_no;?>" class="form-control" style="width: 50%;">
+    </div>
+        <br>
+        <button type="submit" name="id" value="<?php echo $id;?>"class="btn btn-success">Update</button>
+    </form>
+</div>
+</div>
 
 </div>
 <?php
