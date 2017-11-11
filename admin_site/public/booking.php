@@ -16,16 +16,6 @@
 ?>
 
 <?php
-    // 2. Perform database query
-    $query = "SELECT * FROM guest";
-    $result = mysqli_query($connection, $query);
-
-    if(!$result) {
-        die("Database query failed.");
-    }
-?>
-
-<?php
         //codes from w3schools
         //functional part
 
@@ -82,62 +72,66 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Guest name</th>
-                                <th>Address</th>
-                                <th>Contact Number</th>
-                                <th>Email Address</th>
-                                <th>Reservation</th>
-                                <th>Check in</th>
-                                <th>Check out</th>
-                                <th>Room no.</th>
-                                <th>Type</th>
+                                <th style="font-size: 13px;">#</th>
+                                <th style="font-size: 13px;">Guest name</th>
+                                <th style="font-size: 13px;">Address</th>
+                                <th style="font-size: 13px;">Contact Number</th>
+                                <th style="font-size: 13px;">Reservation</th>
+                                <th style="font-size: 13px;">Check in</th>
+                                <th style="font-size: 13px;">Check out</th>
+                                <th style="font-size: 13px;">Room no.</th>
+                                <th style="font-size: 13px;">Type</th>
+                                <th style="font-size: 13px;">Payment</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+
+                            <?php //Table 
+                                // 2. Perform database query
+                                $query = "SELECT * FROM guest";
+                                $result = mysqli_query($connection, $query);
+
+                                if(!$result) {
+                                    die("Database query failed.");
+                                }
+
                                 //3. Use return data (if any)
                                 while($row = mysqli_fetch_assoc($result)) {
                                     //output data from each row
                                     $id = $row['guest_id'];
-                                    $guest_name = $row['firstname'] . "<br>" . $row['middle_Initial'] . ".<br>" . $row['lastname'];
+                                    $firstname = $row['firstname'];
+                                    $lastname = $row['lastname'];
+                                    $middle_Initial = $row['middle_Initial'];
+                                    $guest_name = $firstname . "<br>" . $middle_Initial . ".<br>" . $lastname;
                                     $address = $row['address'];
                                     $contact_no = test_input($row['contact_no']);
                                     $email_add =  test_input($row['email_address']);
                                     $mail = $row['mail'];
 
-                                    echo "<tr><td>". $id ."</td>
-                                    <td>". $guest_name ."</td>
-                                    <td>". $address ."</td>
-                                    <td>". $contact_no ."</td>
-                                    <td>". $email_add . "<br>". $mail ."</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>";
+                                    echo "<tr><td style='font-size: 12px;'>". $id ."</td>
+                                    <td style='font-size: 12px;'>". $guest_name ."</td>
+                                    <td style='font-size: 12px;'>". $address ."</td>
+                                    <td style='font-size: 12px;'>". $contact_no ."</td>
+                                    <td style='font-size: 12px;'>N/A</td>
+                                    <td style='font-size: 12px;'>N/A</td>
+                                    <td style='font-size: 12px;'>N/A</td>
+                                    <td style='font-size: 12px;'>N/A</td>
+                                    <td style='font-size: 12px;'>N/A</td>
+                                    <td style='font-size: 12px;'>N/A</td>
+                                    <td>
+                                    <a href='edit.php?id={$id}&firstname={$firstname}&lastname={$lastname}' class='btn btn-default'>Edit</a>
+                                    <a href='delete.php?id={$id}' class='btn btn-default'>Delete</a>
+                                    </td>";
                                 }
+                                mysqli_free_result($result);
                             ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div>
-                <form action="">
-                    <div class="form-group">
-                        <label for="select">Select ID: </label>
-                        <input type="text" name="id" style="width: 50px; margin-right: 30px;">
-                        <button type="submit" class="btn btn-default">Edit</button>
-                        <button type="submit" class="btn btn-default">Delete</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
-    <?php
-        //4. Release returned data
-        mysqli_free_result($result);
-    ?>
 </body>
 </html>
 
