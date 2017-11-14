@@ -1,56 +1,12 @@
-<?php
-    // 1. Create a database connection
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "asdminorproject";
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
-
-    // Test if connection occurred. 
-    if(mysqli_connect_errno()) {
-        die("Database connection failed: " . 
-            mysqli_connect_error() . 
-            " (" . mysqli_connect_errno() . ")"
-        );
-    }
-?>
+<?php include 'connection.php'?>
 
 <?php
-    // 2. Perform database query
-    $query = "SELECT * FROM admin WHERE user_id = '1'";
-    $result = mysqli_query($connection, $query);
-
-    if(!$result) {
-        die("Database query failed.");
-    }
-
-?>
-
-<?php
-    //codes from w3schools
-    $username = $usernameError = "";
-    $password = $passwordError = "";
-
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        if(empty($_POST["username"])) {
-            $usernameError = "Invalid username. ";
-        }else {
-            $username = test_input($_POST["username"]);
-        }
-
-        if(empty($_POST["password"])) {
-            $passwordError = "Invalid password. ";
-        }else {
-            $password = test_input($_POST["password"]);
-        }
-    }
-
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
-      }
+    }
 ?>
 <html lang="en">
 <head>
@@ -63,26 +19,9 @@
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/bootstrap-theme.css">
     <link rel="stylesheet" href="stylesheets/bootstrap-theme.min.css">
+      
 </head>
 <body>
-    <?php
-    //3. Use return data (if any)
-
-    $user = "";
-    $pass = "";
-
-    while($row = mysqli_fetch_assoc($result)) {
-        //output data from each row
-        $user = $row["username"];
-        $pass = $row["password"];
-    }
-
-    if($username === $user && $password === $pass) {
-        header("Location: confirmation.php");
-    }else {
-    }
-
-    ?>
     <div id="header" class="col-sm-12">
         <div class="container-fluid">
             <h1>The <span id="highlight-header">PETMALU</span> Hotel Admin</h1>
@@ -105,15 +44,71 @@
     </div>
     <div id="content" class="col-sm-10">
         <div class="container-fluid">
+            <h2>Room</h2>
+            <div class="container-fluid" id="table">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="font-size: 13px;">Room no</th>
+                                    <th style="font-size: 13px;">Room Type</th>
+                                    <th style="font-size: 13px;">Price</th>
+                                    <th style="font-size: 13px;">Availability</th>
+                                    <th style="font-size: 13px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody style="width: 99%;">
 
+                                <?php 
+                                
+                                    //Table 
+                                    // 2. Perform database query
+
+                                    $query = "SELECT a.`room_no`, c.`type_name`, c.`price`, d.`avail`
+                                    FROM 
+                                    `room` a, 
+                                    `room_type` b, 
+                                    `type` c,
+                                    `avail` d
+                                    WHERE 
+                                    a.`room_no` = b.`room_no` AND
+                                    b.`type_no` = c.`type_no` AND
+                                    a.`room_no` = d.`room_no` ORDER BY a.`room_no` ASC";
+
+                                    $result = mysqli_query($connection, $query);
+
+                                    if(!$result) {
+                                        die("Database query failed.");
+                                    }
+
+                                    //3. Use return data (if any)
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        //output data from each row
+
+                                        echo "<tr><td style='font-size: 12px;'>". $row['room_no'] ."</td>
+                                        <td style='font-size: 12px;'>". $row['type_name'] ."</td>
+                                        <td style='font-size: 12px;'>". $row['price'] ."</td>
+                                        <td style='font-size: 12px;'>" . $row['avail'] . "</td>
+                                        <td>
+                                        <a href='edit.php'><img src='images/Edit_48px.png' style='width: 20px; height: 20px;'></a>
+                                        <a href='delete.php'><img src='images/Delete_48px.png' style='width: 20px; height: 20px;'></a>
+                                        </td>";
+                                    }
+                                    mysqli_free_result($result);
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <a href="add_room.php" class="btn btn-default">Add Room</a>
+            <a href="add_type.php" class="btn btn-default">Add Type</a>
         </div>
     </div>
-
-    <?php
-        //4. Release returned data
-        mysqli_free_result($result);
-    ?>
-
 </body>
 </html>
 

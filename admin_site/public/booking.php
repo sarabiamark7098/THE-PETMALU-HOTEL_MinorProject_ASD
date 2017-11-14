@@ -1,34 +1,12 @@
-<?php
-    // 1. Create a database connection
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "asdminorproject";
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
+<?php include 'connection.php'?>
 
-    // Test if connection occurred. 
-    if(mysqli_connect_errno()) {
-        die("Database connection failed: " . 
-            mysqli_connect_error() . 
-            " (" . mysqli_connect_errno() . ")"
-        );
+<?php
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
-?>
-
-<?php
-        //codes from w3schools
-        //functional part
-
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
-            
-        }
-
-        function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
 ?>
 
 <html lang="en">
@@ -82,10 +60,10 @@
                                 <th style="font-size: 13px;">Room no.</th>
                                 <th style="font-size: 13px;">Type</th>
                                 <th style="font-size: 13px;">Payment</th>
-                                <th>&nbsp;</th>
+                                <th style="font-size: 13px;">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="width: 99%;">
 
                             <?php //Table 
                                 // 2. Perform database query
@@ -97,8 +75,11 @@
                                 }
 
                                 //3. Use return data (if any)
+                                
                                 while($row = mysqli_fetch_assoc($result)) {
+
                                     //output data from each row
+
                                     $id = test_input($row['guest_id']);
                                     $firstname = test_input($row['firstname']);
                                     $lastname = test_input($row['lastname']);
@@ -126,8 +107,8 @@
                                     lastname={$lastname}&
                                     middle={$middle_Initial}&
                                     address={$address}&
-                                    contact={$contact_no}&' class='btn btn-default'><img src='images/Edit_48px.png' style='width: 20px; height: 20px;'><span style='font-size: 12px;'>Edit</span></a>
-                                    <a href='delete.php?id={$id}' class='btn btn-default'><img src='images/Delete_48px.png' style='width: 20px; height: 20px;'><span style='font-size: 12px;'>Delete</span></a>
+                                    contact={$contact_no}&'><img src='images/Edit_48px.png' style='width: 20px; height: 20px;'></a>
+                                    <a href='delete.php?id={$id}'><img src='images/Delete_48px.png' style='width: 20px; height: 20px;'></a>
                                     </td>";
                                 }
                                 mysqli_free_result($result);

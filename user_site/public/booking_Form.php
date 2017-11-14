@@ -28,7 +28,7 @@
         <div class="bookform" id="bookFormSpacing">
             <h1 style="color: white; font-size: 70px; font-family: sans-serif;">Choose<br>date<br>to<br>Book</h1>
             <br>
-            <form action="avail_room.php" class="form-horizontal">
+            <form action="check.php" method="get" class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-5">
                         <label for="checkin" class="control-label">

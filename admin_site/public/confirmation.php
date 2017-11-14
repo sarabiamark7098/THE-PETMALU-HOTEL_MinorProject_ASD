@@ -1,38 +1,6 @@
-<?php
-    // 1. Create a database connection
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "asdminorproject";
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
-
-    // Test if connection occurred. 
-    if(mysqli_connect_errno()) {
-        die("Database connection failed: " . 
-            mysqli_connect_error() . 
-            " (" . mysqli_connect_errno() . ")"
-        );
-    }
-?>
+<?php include 'connection.php'?>
 
 <?php
-    // 2. Perform database query
-    $query = "SELECT * FROM guest";
-    $result = mysqli_query($connection, $query);
-
-    if(!$result) {
-        die("Database query failed.");
-    }
-
-?>
-
-<?php
-    //codes from w3schools
-
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-    }
-
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -91,10 +59,10 @@
                             <th style="font-size: 13px;">Room no.</th>
                             <th style="font-size: 13px;">Type</th>
                             <th style="font-size: 13px;">Payment</th>
-                            <th style="font-size: 13px;">Confirm</th>
+                            <th style="font-size: 13px;">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="width: 99%;">
 
                         <?php //Table 
                             // 2. Perform database query
@@ -129,7 +97,7 @@
                                 <td style='font-size: 12px;'>N/A</td>
                                 <td style='font-size: 12px;'>N/A</td>
                                 <td>
-                                <a href='confirmed.php?id={$id}' class='btn btn-default'><img src='images/Checked_48px.png' style='width: 24px;'height: 24px;></a>
+                                <a href='confirmed.php?id={$id}'><img src='images/Checked_48px.png' style='width: 24px;'height: 24px;></a>
                                 </td>";
                             }
                             mysqli_free_result($result);

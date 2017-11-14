@@ -31,7 +31,7 @@
 
 #password {
     width: 30%;
-}
+} 
 
 #content span a {
     padding-left: 120px;
@@ -71,7 +71,7 @@
 
 #content tbody{
       overflow-y: scroll;
-      width: 100%;
+      width: 99%;
       height: 200px;
       position: absolute;
 }
@@ -89,3 +89,4 @@
 #table {
     margin-top:40px;
 }
+
