@@ -8,7 +8,11 @@
     }else {
         echo "failed" + $_GET['type_name'];
     }
-    $query = "SELECT a.`room_no`, c.`type_name`, c.`image_data`, c.`price`, d.`avail`
+
+    $check_in = $_SESSION['check_in'];
+    $check_out = $_SESSION['check_out'];
+
+    $query = "SELECT DISTINCT a.`room_no`, c.`type_name`, c.`image_data`, c.`price`, d.`avail`
     FROM 
     `room` a, 
     `room_type` b, 
@@ -18,7 +22,8 @@
     a.`room_no` = b.`room_no` AND
     b.`type_no` = c.`type_no` AND
     a.`room_no` = d.`room_no` AND
-    c.type_name = '$type_name' ORDER BY a.`room_no` ASC";
+    c.type_name = '$type_name' AND
+    d.avail = 0 ORDER BY a.`room_no` ASC";
     $result = mysqli_query($connection, $query);
     if(!$result) {
         die("Database query failed.");

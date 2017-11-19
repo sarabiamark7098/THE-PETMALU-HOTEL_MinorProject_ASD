@@ -1,30 +1,41 @@
 <?php
-     // 1. Create a database connection
-     $dbhost = "localhost";
-     $dbuser = "root";
-     $dbpass = "";
-     $dbname = "asdminorproject";
-     $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
- 
-     // Test if connection occurred. 
-     if(mysqli_connect_errno()) {
-         die("Database connection failed: " . 
-             mysqli_connect_error() . 
-             " (" . mysqli_connect_errno() . ")"
-         );
-     }
+    include 'connection.php';
 
-    if($_SERVER["REQUEST_METHOD"] == "GET") {
-        if(isset($_GET['id'])){
-            $id = test_input($_GET['id']);
+    if(isset($_GET['booking_id'])) {
+        $booking_id = $_GET['booking_id'];
+    }
 
-            $query = "DELETE FROM guest WHERE guest_id = {$id}";
-            $result = mysqli_query($connection, $query);
-        
-            if(result) {
-                header("Location: booking.php");
-            }
-        
+    if(isset($_GET['date_no'])) {
+        $date_no = $_GET['date_no'];
+    }
+
+    if(isset($_GET['guest_id'])) {
+        $guest_id = $_GET['guest_id'];
+    }
+
+    if(isset($_GET['room_no'])) {
+        $room_no = $_GET['room_no'];
+    }
+
+    if(isset($booking_id) && isset($date_no) && isset($guest_id) && isset($room_no)) {
+        $queryDeleteBooking = "DELETE FROM booking WHERE booking_id = $booking_id";
+        $resultDeleteBooking = mysqli_query($connection, $queryDeleteBooking);
+        echo $queryDeleteBooking."<br>";
+
+        $queryDeleteDate = "DELETE FROM booking_date WHERE date_no = $date_no";
+        $resultDeleteDate = mysqli_query($connection, $queryDeleteDate);
+        echo $queryDeleteDate."<br>";
+
+        $querDeleteGuest = "DELETE FROM guest WHERE guest_id = $guest_id";
+        $resultDeleteGuest = mysqli_query($connection, $querDeleteGuest);
+        echo $querDeleteGuest."<br>";
+
+        $queryUpdateRoomAvail = "UPDATE avail SET avail = 0 WHERE room_no = $room_no";
+        $resultUpdateRoomAvail = mysqli_query($connection, $queryUpdateRoomAvail);
+        echo $queryUpdateRoomAvail."<br>";
+
+        if($resultDeleteBooking && $resultDeleteDate && $resultDeleteGuest) {
+            header("Location: booking.php");
         }
     }
 

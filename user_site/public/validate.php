@@ -44,6 +44,12 @@
             $queryUpdateRoomAvail .= "WHERE room_no = $room_no";
             echo $queryUpdateRoomAvail."<br>";
             $resultUpdateRoomAvail = mysqli_query($connection, $queryUpdateRoomAvail);
+
+            $queryInsertDateAvail  = "INSERT INTO date_avail ";
+            $queryInsertDateAvail .= "(date_no, room_no) ";
+            $queryInsertDateAvail .= "VALUES ";
+            $queryInsertDateAvail .= "($date_no, $room_no)";
+            $resultInsertDateAvail = mysqli_query($connection, $queryInsertDateAvail);
         }
 
         if(isset($_GET['firstname'])){

@@ -1,11 +1,16 @@
 <?php
     include 'connection.php';
+
+    session_start();
+
     $check_in; $check_out;
     if(isset($_GET['check_in'])) {
         $check_in = $_GET['check_in'];
+        $_SESSION['check_in'] = $check_in;
     }
     if(isset($_GET['check_out'])) {
         $check_out = $_GET['check_out'];
+        $_SESSION['check_out'] = $check_out;
     }
 ?>
 <html lang="en">
@@ -79,7 +84,7 @@
                                     }
                                 };
                                 xhttp.open("GET", "load_table_room.php?type_name="+str, true);
-                                xhttp.send();
+                                    xhttp.send();
                                 }
                             </script>
                         </tbody>

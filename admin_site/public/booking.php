@@ -43,7 +43,16 @@
         </div>
     </div>
     <div id="content" class="col-sm-10">
+        <div class="container-fluid">
         <h2>Bookings</h2>
+            <select name="optionBooking" onchange="showBookings(this.value)" class="form-control" style="width: 15%; float: right; margin-top: -7px;">
+                <option value="null"></option>
+                <option value="all">All Bookings</option>
+                <option value="in">Check in Today</option>
+                <option value="out">Check out Today</option>
+            </select>
+            <label for="choose" style="float: right; font-size: 15px;">Select Views: &nbsp;</label>
+        </div>
         <div class="container-fluid" id="table">
             <div class="col-sm-12">
                 <div class="table-responsive">
@@ -63,59 +72,25 @@
                                 <th style="font-size: 13px;">Action</th>
                             </tr>
                         </thead>
-                        <tbody style="width: 99%;">
-                            <?php //Table 
-                                // 2. Perform database query
-                                $query = "SELECT e.booking_id, d.`firstname`, d.`middle_Initial`, d.`lastname`, d.`address`, d.`contact_no`, a.`booking_date`, a.`check_in`, a.`check_out`, b.`room_no`, g.`type_name` 
-                                FROM
-                                `booking_date` a,
-                                `room` b,
-                                `hotel` c,
-                                `guest` d,
-                                `booking` e,
-                                `room_type` f,
-                                `type` g,
-                                `avail` h
-                                WHERE
-                                a.`date_no` = e.`date_no` AND
-                                b.`room_no` = e.`room_no` AND
-                                c.`hotel_id` = e.`hotel_id` AND
-                                d.`guest_id` = e.`guest_id` AND
-                                b.`room_no` = f.`room_no` AND
-                                f.`type_no` = g.`type_no` AND
-                                b.`room_no` = h.`room_no` AND
-                                e.`confirm` = 1
-                                ";
-                                $result = mysqli_query($connection, $query);
-                                if(!$result) {
-                                    die("Database query failed.");
+                        <tbody id="show-tables" style="width: 99%;">
+                            <!--Ajax code auto refresh a certain section in html-->
+                            <script>
+                                function showBookings(str) {
+                                var xhttp;    
+                                if (str == "") {
+                                    document.getElementById("show-tables").innerHTML = "";
+                                    return;
                                 }
-                                //3. Use return data (if any)
-                                while($row = mysqli_fetch_assoc($result)) {
-                                    //output data from each row
-                                    echo "<tr><td style='font-size: 12px;'>". $row['booking_id'] ."</td>
-                                    <td style='font-size: 12px;'>". $row['firstname'] ."<br>". $row['middle_Initial']."<br>".$row['lastname']."</td>
-                                    <td style='font-size: 12px;'>". $row['address']."</td>
-                                    <td style='font-size: 12px;'>". $row['contact_no'] ."</td>
-                                    <td style='font-size: 12px;'>". $row['booking_date'] ."</td>
-                                    <td style='font-size: 12px;'>". $row['check_in'] ."</td>
-                                    <td style='font-size: 12px;'>". $row['check_out'] ."</td>
-                                    <td style='font-size: 12px;'>". $row['room_no'] ."</td>
-                                    <td style='font-size: 12px;'>". $row['type_name'] ."</td>
-                                    <td style='font-size: 12px;'>N/A</td>
-                                    <td>
-                                    <a href='edit.php?
-                                    id={$row['booking_id']}&
-                                    firstname={$row['firstname']}&
-                                    lastname={$row['lastname']}&
-                                    middle={$row['middle_Initial']}&
-                                    address={$row['address']}&
-                                    contact={$row['contact_no']}&'><img src='images/Edit_48px.png' style='width: 20px; height: 20px;'></a>
-                                    <a href='delete.php?id={$row['booking_id']}'><img src='images/Delete_48px.png' style='width: 20px; height: 20px;'></a>
-                                    </td>";
+                                xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                    document.getElementById("show-tables").innerHTML = this.responseText;
+                                    }
+                                };
+                                xhttp.open("GET", "option.php?option="+str, true);
+                                    xhttp.send();
                                 }
-                                mysqli_free_result($result);
-                            ?>
+                            </script>
                         </tbody>
                     </table>
                 </div>
