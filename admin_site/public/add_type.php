@@ -1,5 +1,7 @@
-<?php 
+<?php
     include 'connection.php';
+    ini_set('mysqli.connect_timeout', 300);
+    ini_set('default_socket_timeout', 300);
 ?>
 
 <html lang="en">
@@ -39,22 +41,64 @@
             <div class="col-sm-6" style="background: #bdc3c7; height: 100%; padding-top: 10px;">
                 <h1 class="container-fluid">Add Type</h1>
                 <p id="required" class="container-fluid"></p>
-                <form action="upload.php" class="container-fluid" method="post" enctype="multipart/form-data">
+                <form class="container-fluidmetho" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="firstname"><span id="required"></span> Type: </label>
-                        <input type="text" name="type_name" class="form-control">
+                        <label for="room_type">Room type:</label>
+                        <input type="text" name="type_name" class="form-control" style="width: 50%;">
                     </div>
                     <div class="form-group">
-                        <label for="middleinitial"><span id="required"></span> Cost: </label>
-                        <input type="text" name="cost" class="form-control" style="width: 50%;">
+                        <label for="cost">Cost:</label>
+                        <input type="text" name="price" class="form-control" style="width: 50%;">
                     </div>
                     <div>
                         <label for="photo">Select image to upload:</label>
-                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="file" name="image" id="image">
                     </div>
                     <br>
-                    <button type="submit" name="id" class="btn btn-success">Add</button>
+                    <input type="submit" value="Insert" id="insert" name="submit" class="btn btn-success">
                 </form>
+                <?php
+                   
+
+                    function test_input($data) {
+                        $data = trim($data);
+                        $data = stripslashes($data);
+                        $data = htmlspecialchars($data);
+                        return $data;
+                    }   
+
+                    if(isset($_POST['submit'])) {
+
+                        $type_name; $price;
+                        
+                        if(isset($_POST['type_name'])) {
+                            $type_name = $_POST['type_name'];
+                        }
+
+                        if(isset($_POST['price'])) {
+                            $price = $_POST['price'];
+                        }
+
+                        if(getimagesize($_FILES['image']['tmp_name']) == FALSE) {
+                               echo "Please select an image";
+                        }else {
+                            $image = addslashes($_FILES['image']['tmp_name']);
+                            $name = addslashes($_FILES['image']['name']);
+                            $image = file_get_contents($image);
+                            $image = base64_encode($image);
+                            
+                            $query = "INSERT INTO `type` (type_name, price, image_name, image_data) VALUES ('$type_name', $price, '$name', '$image')";
+                            $result = mysqli_query($connection, $query);
+
+                            if($result) {
+                                echo "success";
+                            }else {
+                                echo "failed" ;
+                            }
+                        }
+                    }
+
+                ?>
             </div>
         </div>
     </body>

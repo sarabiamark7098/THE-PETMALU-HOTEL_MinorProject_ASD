@@ -1,30 +1,17 @@
 <?php
-     // 1. Create a database connection
-     $dbhost = "localhost";
-     $dbuser = "root";
-     $dbpass = "";
-     $dbname = "asdminorproject";
-     $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
- 
-     // Test if connection occurred. 
-     if(mysqli_connect_errno()) {
-         die("Database connection failed: " . 
-             mysqli_connect_error() . 
-             " (" . mysqli_connect_errno() . ")"
-         );
-     }
+     include 'connection.php';
 
-    if($_SERVER["REQUEST_METHOD"] == "GET") {
-        if(isset($_GET['id'])){
-            $id = test_input($_GET['id']);
-
-            $query = "DELETE FROM guest WHERE guest_id = {$id}";
-            $result = mysqli_query($connection, $query);
-        
-            if(result) {
-                header("Location: booking.php");
-            }
-        
+     if(isset($_GET['booking_id'])){
+        $booking_id = test_input($_GET['booking_id']);
+        echo $booking_id."<br>";
+        $query  = "UPDATE booking SET ";
+        $query .= "confirm = 1 ";
+        $query .= "WHERE booking_id = ".$booking_id;
+        echo $query."<br>";
+        $result = mysqli_query($connection, $query);
+    
+        if($result) {
+            header("Location: confirmation.php");
         }
     }
 
@@ -34,6 +21,4 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-
-    mysqli_close($connection);
 ?>

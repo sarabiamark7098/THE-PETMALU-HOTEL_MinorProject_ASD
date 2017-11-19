@@ -1,65 +1,16 @@
 <?php
-    // 1. Create a database connection
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "asdminorproject";
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
+    include 'connection.php';
 
-    // Test if connection occurred. 
-    if(mysqli_connect_errno()) {
-        die("Database connection failed: " . 
-            mysqli_connect_error() . 
-            " (" . mysqli_connect_errno() . ")"
-        );
-    }
-?>
-
-<?php
-    //codes from w3schools
-
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        if(isset($_POST['firstname'])){
-            $firstname = $_POST['firstname'];
-        }
-        if(isset($_POST['lastname'])){
-            $lastname = $_POST['lastname'];
-        }
-
-        if(isset($_POST['middleI'])){
-            $middleI = $_POST['middleI'];
-        }
-
-        if(isset($_POST['address'])){
-            $address = $_POST['address'];
-        }
-
-        if(isset($_POST['contact_no'])){
-            $contact_no = $_POST['contact_no'];
-        }
-
-        if(isset($_POST['email_add'])){
-            $email_add = $_POST['email_add'];
-        }
-
-        if(isset($_POST['mail'])){
-            $mail = $_POST['mail'];
-        }
-        
-        $query = "INSERT INTO guest (firstname, lastname, middle_Initial, address, contact_no, email_address, mail) VALUES ('".$firstname."', '".$lastname."', '".$middleI."', '".$address."', '".$contact_no."', '".$email_add."', '".$mail."')";
-
-        if(mysqli_query($connection, $query)){
-            header("Location: complete.php");
-        }else {
-            echo "Query failed";
-        }
+    if(isset($_GET['check_in'])) {
+        $check_in = $_GET['check_in'];
     }
 
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+    if(isset($_GET['check_out'])) {
+        $check_out = $_GET['check_out'];
+    }
+
+    if(isset($_GET['room_no'])) {
+        $room_no = $_GET['room_no'];
     }
 ?>
 
@@ -86,7 +37,7 @@
     <nav class="booking-nav">
         <div class="container">
             <div class="navbar-header page-scroll">
-                <a class="navbar-brand style-nav" href="#">Hotel Booking System</a>
+                <a class="navbar-brand style-nav" href="index.html">The PETMALU Hotel</a>
             </div>
             <ul class="nav navbar-nav" style="float: right;">
                 <li><a href="index.html" class="style-nav">Home</a></li>
@@ -94,14 +45,20 @@
             </ul>
         </div>
     </nav>
-
+    <div>
+        <div class="col-sm-6"  style="background: #34495e; height: 100%; padding-top: 20px;">
+            <div class="container-fluid">
+                <img src="images/H2.jpg" alt="show" width=500 heigh=500 style="margin-top: 40px; margin-left: 40px;">
+            </div>
+        </div>
+    </div>
     <div>
         <div class="col-sm-6" style="background: #bdc3c7; height: 100%; padding-top: 10px;">
-            <h1 class="container-fluid">Guest info</h1>
+            <h2 class="container-fluid">Guest info</h2>
             <br>
             <p id="required" class="container-fluid">* required fields</p>
             <br>
-            <form action="customer_Info.php" class="container-fluid" method="POST">
+            <form action="validate.php" class="container-fluid" method="get">
                 <div class="form-group">
                     <label for="firstname"><span id="required">*</span> First name:</label>
                     <input type="text" name="firstname" class="form-control">
@@ -112,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <label for="middleinitial"><span id="required">*</span> Middle Initial:</label>
-                    <input type="text" name="middleI" class="form-control" style="width: 10%;">
+                    <input type="text" name="middleI" class="form-control" style="width: 7%;">
                 </div>
                 <div class="form-group">
                     <label for="address"><span id="required">*</span> Address: </label>
@@ -128,19 +85,9 @@
                     <input type="text" name="mail" class="col-sm-2 form-control" placeholder="@example.com"style="width: 25%;">
                 </div>
                 <br><br>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" name="guest-submit" value="guest-submit" class="btn btn-success">Submit</button>
             </form>
-        </div>
-    </div>
-    <div>
-        <div class="col-sm-6"  style="background: #ecf0f1; height: 100%; padding-top: 20px;">
-
         </div>
     </div>
 </body>
 </html>
-
-<?php
-// 5. Close database connection
-mysqli_close($connection);
-?>

@@ -53,6 +53,7 @@
                                 <tr>
                                     <th style="font-size: 13px;">Room no</th>
                                     <th style="font-size: 13px;">Room Type</th>
+                                    <th style="font-size: 13px;">Picture</th>
                                     <th style="font-size: 13px;">Price</th>
                                     <th style="font-size: 13px;">Availability</th>
                                     <th style="font-size: 13px;">Action</th>
@@ -65,7 +66,7 @@
                                     //Table 
                                     // 2. Perform database query
 
-                                    $query = "SELECT a.`room_no`, c.`type_name`, c.`price`, d.`avail`
+                                    $query = "SELECT a.`room_no`, c.`type_name`, c.`image_data`, c.`price`, d.`avail`
                                     FROM 
                                     `room` a, 
                                     `room_type` b, 
@@ -88,11 +89,12 @@
 
                                         echo "<tr><td style='font-size: 12px;'>". $row['room_no'] ."</td>
                                         <td style='font-size: 12px;'>". $row['type_name'] ."</td>
+                                        <td style='font-size: 12px;'><img width='100' height='100' src='data:image;base64,". $row['image_data'] ."'></td>
                                         <td style='font-size: 12px;'>". $row['price'] ."</td>
                                         <td style='font-size: 12px;'>" . $row['avail'] . "</td>
                                         <td>
-                                        <a href='edit.php'><img src='images/Edit_48px.png' style='width: 20px; height: 20px;'></a>
-                                        <a href='delete.php'><img src='images/Delete_48px.png' style='width: 20px; height: 20px;'></a>
+                                        <a href='delete_room.php?room_no={$row['room_no']}&type_name={$row['type_name']}'>
+                                        <img src='images/Delete_48px.png' style='width: 20px; height: 20px;'></a>
                                         </td>";
                                     }
                                     mysqli_free_result($result);

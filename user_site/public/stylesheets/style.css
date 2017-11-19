@@ -105,3 +105,29 @@ nav.shrink {
 .footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6, .footer p {
     color: black;
 }
+
+#Select-Rooms tr {
+    width: 100%;
+    display: inline-table;
+    height:20px;
+    table-layout: fixed;      
+}
+
+#Select-Rooms th {
+    font-size: 10px;
+}
+
+#Select-Rooms thead {
+    background: #2c3e50;
+    color: white;
+    font-size: 12px;
+}
+
+#check-room {
+    background: #bdc3c7;
+    min-height: 100%;
+}
+
+#check-details {
+    margin: 40px;
+}

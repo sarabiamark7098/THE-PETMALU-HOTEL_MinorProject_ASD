@@ -1,3 +1,27 @@
+<?php
+    session_start();
+
+    include 'connection.php';     
+
+    $success = false;
+    if(isset($_GET['check-date'])) {
+        if(isset($_GET['check-in'])) {
+            $check_in = $_GET['check-in'];
+            $_SESSION['check_in'] = $check_in;
+            $success = true;
+        }
+        if(isset($_GET['check-out'])) {
+            $check_out = $_GET['check-out'];
+            $_SESSION['check_out'] = $check_out;
+            $success = true;
+        }
+
+        if($success) {
+            header("Location: avail_room.php?check_in=$check_in&check_out=$check_out");
+        }
+    }
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +39,7 @@
     <nav class="booking-nav">
         <div class="container">
             <div class="navbar-header page-scroll">
-                <a class="navbar-brand style-nav" href="#">Hotel Booking System</a>
+                <a class="navbar-brand style-nav" href="index.html">The PETMALU Hotel</a>
             </div>
             <ul class="nav navbar-nav" style="float: right;">
                 <li><a href="index.html" class="style-nav">Home</a></li>
@@ -28,23 +52,23 @@
         <div class="bookform" id="bookFormSpacing">
             <h1 style="color: white; font-size: 70px; font-family: sans-serif;">Choose<br>date<br>to<br>Book</h1>
             <br>
-            <form action="check.php" method="get" class="form-horizontal">
+            <form action="booking_Form.php" method="get" class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-5">
                         <label for="checkin" class="control-label">
                             <h2><span class="label">Check in: </span></h2>
                         </label>
-                        <input type="date" name="checkin" class="form-control input-lg">
+                        <input type="date" name="check-in" class="form-control input-lg">
                     </div>
                     <div class="col-sm-5">
                         <label for="checkout" class="control-label">
                             <h2><span class="label">Check out: </span>
                         </h2></label>
-                        <input type="date" name="checkout" class="form-control input-lg">
+                        <input type="date" name="check-out" class="form-control input-lg">
                     </div>
                     <div class="col-sm-6">
                         <br><br>
-                        <input type="submit" value="Check Avail Room" name="submit" class="btn btn-success btn-lg">
+                        <input type="submit" value="Proceed" name="check-date" class="btn btn-success btn-lg">
                     </div>
                 </div>
             </form>
@@ -54,7 +78,7 @@
         <div>
             <div>
                 <center>
-                    <img src="images/earth-icon.png" alt="earth">
+                    <img src="images/mix_07.jpg" alt="mix" width=450 height=450 style="margin-top:50px;">
                 </center>
             </div>
         </div>

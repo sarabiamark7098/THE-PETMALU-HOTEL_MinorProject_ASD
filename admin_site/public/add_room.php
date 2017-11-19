@@ -35,7 +35,6 @@
         <div id="content" class="col-sm-10">
             <div class="col-sm-6" style="background: #bdc3c7; height: 100%; padding-top: 10px;">
                 <h1 class="container-fluid">Add Room</h1>
-                <p id="required" class="container-fluid"></p>
                 <form action="add_room_type.php" class="container-fluid" method="post">
                     <div class="form-group">
                         <label for="firstname">Room No. :</label>
@@ -49,8 +48,8 @@
                         ?>
                         <select name="room_type" class="form-control" style="width: 50%;">
                             <option value="null"><NULL></option>
-                            <?php while($row = mysqli_fetch_assoc($result)):;?>
-                            <option value="<?php echo $row['type_name']?>"><?php echo $row['type_name'];?></option>
+                            <?php while($getRoomType = mysqli_fetch_assoc($result)):;?>
+                            <option value="<?php echo $getRoomType['type_name']?>"><?php echo $getRoomType['type_name'];?></option>
                             <?php endwhile;?>
                         </select>
                     </div>

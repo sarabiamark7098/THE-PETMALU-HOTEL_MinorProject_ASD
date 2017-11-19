@@ -1,21 +1,27 @@
+<?php
+    include 'connection.php';
+    $check_in; $check_out;
+    if(isset($_GET['check_in'])) {
+        $check_in = $_GET['check_in'];
+    }
+    if(isset($_GET['check_out'])) {
+        $check_out = $_GET['check_out'];
+    }
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booking | Hotel Reservation</title>
-    <link rel="stylesheet" href="stylesheets/style.css">
-    <link rel="stylesheet" href="stylesheets/bootstrap.css">
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesheets/bootstrap-theme.css">
-    <link rel="stylesheet" href="stylesheets/bootstrap-theme.min.css">
-
+    <link rel="stylesheet" href="stylesheets/style.css?ver=1.0.1">
 </head>
 <body>
     <nav class="booking-nav">
         <div class="container">
             <div class="navbar-header page-scroll">
-                <a class="navbar-brand style-nav" href="#">Hotel Booking System</a>
+                <a class="navbar-brand style-nav" href="index.html">The PETMALU Hotel</a>
             </div>
             <ul class="nav navbar-nav" style="float: right;">
                 <li><a href="index.html" class="style-nav">Home</a></li>
@@ -24,65 +30,63 @@
         </div>
     </nav>
 
-    <div class="col-sm-6" style="background: #34495e; min-height:100%;">
-        <div class="container-fluid">
-            <div style="padding-top:30px;">
-                <form action="booking_Form.php" class="form-horizontal">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg">Back</button>
-                    </div>
-                </form>
-            </div>
-            <form action="customer_Info.php" class="form-horizontal">
-                <div class="container-fluid">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="checkin" class="control-label"><h2><span class="label">Check in: <span></span></span></h2></label>
-                            <br>
-                            <label for="checkout" class="control-label"><h2><span class="label">Check out: <span></span></span></h2></label>
-                            <hr>    
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
-                            <label for="room-type" class="control-label"><h2><span class="label">Room Type: </span></h2></label>
-                            <select name="type[]" size="1" class="form-control input-lg">
-                                <option value="<NULL>"><NULL></option>
-                                <option value="King">King</option>
-                                <option value="Queen">Queen</option>
-                                <option value="Deluxe">Deluxe</option>
-                            </select>
-                            </div>
-                            <div class="col-sm-4">
-                            <label for="room-no" class="control-label"><h2><span class="label">Room no: </span></h2></label>
-                            <select name="room[]" size="1" class="form-control input-lg col-sm-4">
-                                <option value="null"><NULL></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            </div>
-                        <div class="col-sm-4">
-                            <label for="Price" class="control-label"><h2><span class="label">Price: </span><h2></label>
-                            <label for="outputPrice" class="label form-control col-sm-4"><span style="color: black;"></span></label>
-                        </div>
-                        <div class="col-sm-12">
-                            <br><br>
-                            <button type="submit" class="btn btn-success btn-lg">Next</button>  
-                        </div>
-                        </div>
-                    </div>
+    <div class="col-sm-12" id="check-room">
+        <div id="check-details" class="container-fluid">
+            <label for="check-in">Check in: <span><?php echo $check_in;?></span></label><br><br>
+            <label for="check-out">Check out: <span><?php echo $check_out;?></span></label>
+        </div>
+        <div class="container-fluid" style="width: 15%; float: right; margin-top: -100px; margin-right: 15px;">
+            <?php
+                $queryRoomType = "SELECT type_name FROM type";
+                $resultRoomType = mysqli_query($connection, $queryRoomType);
+            ?>
+            <label for="select">Select Room Type:</label>
+            <select name="room_type" class="form-control" onchange="showRooms(this.value)">
+                <option value="null"><NULL></option>
+                <?php while($row = mysqli_fetch_assoc($resultRoomType)):;?>
+                <option value="<?php echo $row['type_name'];?>"><?php echo $row['type_name'];?></option>
+                <?php endwhile;?>
+                <?php mysqli_free_result($result); ?>
+            </select>
+        </div>
+        <div class="container-fluid" id="Select-Rooms">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="font-size: 13px;">Room no</th>
+                                <th style="font-size: 13px;">Room Type</th>
+                                <th style="font-size: 13px;">Picture</th>
+                                <th style="font-size: 13px;">Price</th>
+                                <th style="font-size: 13px;">Availability</th>
+                                <th style="font-size: 13px;">Book</th>
+                            </tr>
+                        </thead>
+                        <tbody id="show-tables" style="width: 99%;">
+                            <!--Ajax code auto refresh a certain section in html-->
+                            <script>
+                                function showRooms(str) {
+                                var xhttp;    
+                                if (str == "") {
+                                    document.getElementById("show-tables").innerHTML = "";
+                                    return;
+                                }
+                                xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                    document.getElementById("show-tables").innerHTML = this.responseText;
+                                    }
+                                };
+                                xhttp.open("GET", "load_table_room.php?type_name="+str, true);
+                                xhttp.send();
+                                }
+                            </script>
+                        </tbody>
+                    </table>
                 </div>
-            </form>
+            </div>  
         </div>
     </div>
-
-    <div class="col-sm-6" id="formshowcase">
-        <div class="container-fluid">
-            <img src="images/rocket-icon.png" alt="rocket">
-        </div>
-    </div>
-
 </body>
 </html>

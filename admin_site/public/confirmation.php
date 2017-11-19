@@ -66,7 +66,26 @@
 
                         <?php //Table 
                             // 2. Perform database query
-                            $query = "SELECT * FROM guest";
+                            $query = "SELECT e.booking_id, d.`firstname`, d.`middle_Initial`, d.`lastname`, d.`address`, d.`contact_no`, a.`booking_date`, a.`check_in`, a.`check_out`, b.`room_no`, g.`type_name` 
+                            FROM
+                            `booking_date` a,
+                            `room` b,
+                            `hotel` c,
+                            `guest` d,
+                            `booking` e,
+                            `room_type` f,
+                            `type` g,
+                            `avail` h
+                            WHERE
+                            a.`date_no` = e.`date_no` AND
+                            b.`room_no` = e.`room_no` AND
+                            c.`hotel_id` = e.`hotel_id` AND
+                            d.`guest_id` = e.`guest_id` AND
+                            b.`room_no` = f.`room_no` AND
+                            f.`type_no` = g.`type_no` AND
+                            b.`room_no` = h.`room_no` AND
+                            e.`confirm` = 0
+                            ";
                             $result = mysqli_query($connection, $query);
 
                             if(!$result) {
@@ -75,29 +94,18 @@
 
                             //3. Use return data (if any)
                             while($row = mysqli_fetch_assoc($result)) {
-                                //output data from each row
-                                $id = test_input($row['guest_id']);
-                                $firstname = test_input($row['firstname']);
-                                $lastname = test_input($row['lastname']);
-                                $middle_Initial = test_input($row['middle_Initial']);
-                                $guest_name = $firstname . "<br>" . $middle_Initial . ".<br>" . $lastname;
-                                $address = test_input($row['address']);
-                                $contact_no = test_input($row['contact_no']);
-                                $email_add =  test_input($row['email_address']);
-                                $mail = test_input($row['mail']);
-
-                                echo "<tr><td style='font-size: 12px;'>". $id ."</td>
-                                <td style='font-size: 12px;'>". $guest_name ."</td>
-                                <td style='font-size: 12px;'>". $address ."</td>
-                                <td style='font-size: 12px;'>". $contact_no ."</td>
-                                <td style='font-size: 12px;'>N/A</td>
-                                <td style='font-size: 12px;'>N/A</td>
-                                <td style='font-size: 12px;'>N/A</td>
-                                <td style='font-size: 12px;'>N/A</td>
-                                <td style='font-size: 12px;'>N/A</td>
+                                echo "<tr><td style='font-size: 12px;'>". $row['booking_id'] ."</td>
+                                <td style='font-size: 12px;'>". $row['firstname'] ."<br>". $row['middle_Initial']."<br>".$row['lastname']."</td>
+                                <td style='font-size: 12px;'>". $row['address']."</td>
+                                <td style='font-size: 12px;'>". $row['contact_no'] ."</td>
+                                <td style='font-size: 12px;'>". $row['booking_date'] ."</td>
+                                <td style='font-size: 12px;'>". $row['check_in'] ."</td>
+                                <td style='font-size: 12px;'>". $row['check_out'] ."</td>
+                                <td style='font-size: 12px;'>". $row['room_no'] ."</td>
+                                <td style='font-size: 12px;'>". $row['type_name'] ."</td>
                                 <td style='font-size: 12px;'>N/A</td>
                                 <td>
-                                <a href='confirmed.php?id={$id}'><img src='images/Checked_48px.png' style='width: 24px;'height: 24px;></a>
+                                <a href='confirmed.php?booking_id={$row['booking_id']}'><img src='images/Checked_48px.png' style='width: 24px;'height: 24px;></a>
                                 </td>";
                             }
                             mysqli_free_result($result);
