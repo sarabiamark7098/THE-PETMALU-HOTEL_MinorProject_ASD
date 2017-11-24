@@ -41,7 +41,7 @@
             <div class="col-sm-6" style="background: #bdc3c7; height: 100%; padding-top: 10px;">
                 <h1 class="container-fluid">Add Type</h1>
                 <p id="required" class="container-fluid"></p>
-                <form class="container-fluidmetho" method="post" enctype="multipart/form-data">
+                <form class="container-fluid" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="room_type">Room type:</label>
                         <input type="text" name="type_name" class="form-control" style="width: 50%;">

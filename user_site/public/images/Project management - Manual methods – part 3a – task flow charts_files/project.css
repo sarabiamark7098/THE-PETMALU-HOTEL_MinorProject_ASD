@@ -1,0 +1,1647 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*....General....*/
+
+/*attributes for tags below*/
+
+/*=margin, =padding*/
+
+* { margin: 0; padding: 0; }/*removes all margins and padding*/
+
+/*=Links*/
+
+a:link {color: #0066CC; text-decoration: none;} /*no underlining*/
+a:visited {color: #0066CC; text-decoration: none;}/*note that the visited state will always show after being clicked even when refreshed*/
+a:hover {color: #FF0000; text-decoration: underline}
+a:active, a:focus {color: #FF00FF}
+
+
+/*=<h>*/
+
+h1, h2, h3, h4, h5, h6 {font-family: Georgia, "Times New Roman", Times, serif;}
+
+/*=<h2>*/
+
+h2 {
+		font-size: 120%;/*20% larger than the browser norm*/
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		}
+
+/*=<h3>*/
+
+h3 {font-size: 110%;}/*10% larger than the browser norm*/
+
+/*=<p>*/
+
+p {
+		line-height: 1.7;
+		margin: 1.5em 0;/*sets top/bottom at 1.5 and left/right at 0*/
+		}
+
+
+/*=<body>*/
+
+body {
+		font-family: Verdana, Arial, Helvetica, sans-serif;
+		text-align: justify;
+		font-size: 12px;
+		background-color: #FFFFFF;
+		}
+
+/*=clear*/
+/*empty div tags with the id="clear" to clear left and right floated elements*/
+
+#clear {
+		clear:both;
+		}
+
+/*=container*/
+
+#container {
+		width: 950px;
+		margin: 0 auto;/*top/bottom at 0 and left/right on auto will centre the div container*/
+		position:relative;/*Position relative allows other items within the div container to be positioned 'absolutely', relative' to the container div*/
+		}
+
+/*=header_container*/
+
+#header_container {
+		float: none;
+		position: relative;/*Position relative allows other items within the div header_container to be positioned 'absolutely', relative' to the header_container div*/
+		height: 90px;
+		}
+
+#header_image {
+		float: left;
+		}
+
+#product_image {
+		width:340;
+		height:50;
+		float:right;
+		margin-top:10px;
+		
+		}
+
+/*=left_main_topic_menu*/
+
+#left_main_topic_menu{
+		width:130px;
+		position:absolute; top: 150px; left: -140px;
+
+		}
+
+.left_main_topic_submenu{
+		margin-bottom:10px;
+/*		border:solid 1px #FF0000;*/
+		padding:2px 0 2px 5px;/*top, right, bottom, left*/
+		background-color:#cccccc;
+		border-radius: 4px;/*css3 IE 9, firefox 4, chrome 5, safari 5, opera 10.5*/
+
+		}
+
+.left_main_topic_submenu a{
+		text-decoration:none;
+		color:#014584;
+		
+		}
+
+.left_main_topic_submenu:hover a{
+		text-decoration:none;
+		color:#FFFFFF;
+		display:block;/*Allows all the area to be clickable*/
+		
+		}
+
+/*=google search bar*/
+
+#search {
+		float: right;
+		}
+
+
+
+#cse-search-box {
+		padding-right: 5px;
+		}
+
+/*the text box*/
+
+/*Note the use of attribute selectors as for input[type=text] to try and focus selection better*/
+/*This coding has been deactivated to retain the original look of the Google search box*/
+#search input[type=text] {
+		/*margin-top:1px;
+		border: solid 1px #014584;
+		background-color: #eaecee;*//*color of input box before mouse hover*/
+		}
+
+#search input[type=text]:hover {
+/*		border: solid 1px #6d89b4;
+		background-color: #FFFFFF;*//*color of input box on mouse hover*/
+		}
+
+#search input[type=text]:active, input:focus {
+		}
+
+/*the submit button*/
+
+#search input[type=submit] { 
+		background-color: #e5eadd;
+		color: #014584;
+		border: solid 1px #014584;
+		padding: 0 .3em 0 .3em;
+		text-transform:uppercase;
+		font-size:.85em;
+		font-family: Verdana, Arial, Helvetica, sans-serif;
+		}
+
+#search input[type=submit]:hover { 
+		background-color: #6d89b4;
+		color: #e5eadd;
+		border: solid 1px #014584;
+		}
+
+/*=middle_container*/
+
+#middle_container {
+		position:relative;/*so that items can be positioned absolutely relative to this div*/
+		width: 950px;
+		float:none;
+		clear:both;
+		padding-bottom: 50px;
+		overflow:auto;/*this allows the div to expand to fill the content as it would otherwise collapse with floated divs*/
+		}
+
+/*=logo image*/
+
+#logo { 
+		position: absolute; top: 0; left: 62.5px;
+		width: 100px;
+		height: 139px;
+		background-image: url(../images/owl_100.png);/*background image cannot be clicked*/
+		}
+
+#logo img {
+		border: none;
+		}
+
+/*=middle_top_image and =left_image*/
+
+#middle_top_image_container {
+		background-color: #CCCC99;
+		float:none;/*this allows the right image to be floated right otherwise a left float would have made all float to the left*/
+		}
+
+#left_image {
+		float:left;
+		background: url(../images/sitenav_top_left.png) no-repeat;
+		width: 221px;
+		height: 13px;
+		}
+
+/*=sitenav_container*/
+
+#sitenav_container {
+
+		}
+
+#sitenav {
+		float:left;
+		z-index:2;
+		width: 221px;
+		padding: 11em 0 2em 0;	/*top, right, bottom, left*/
+		background-color: #eaecee;
+		}
+
+#sitenav p { 
+		background-color: #d5dade;
+		border-right: double 6px #ffffff;
+		color: #014584;
+		margin: 1em 0 1em 0;
+		padding: 0 0 .2em 1em;
+		width: 55%;
+		}
+
+#sitenav ul {
+		list-style-type: none;
+		text-align: left;
+		}
+
+#sitenav a {
+		display: block;
+		font-size: .9em;		
+		width: 200px;		
+		padding: .3em 0 .3em 1em;
+		color: #e5eadd;
+		background-color: #6d89b4;
+		border-right: double 5px #e5eadd;
+		}
+
+#sitenav a:hover {
+		color: #6d89b4;
+		background-color: #e5eadd;
+		border-right: outset 5px #6d89b4;		
+		text-decoration: none;
+		}
+
+.menu li {
+		position: relative;/*establishes relative position for submenu*/
+		z-index:1;/*needed to avoid transparency over text in flyouts*/
+		}
+
+
+.submenu {
+		position: absolute; top: 0; left: 216px;/*relative to the menu li*/
+		}
+
+.active li {
+		display: none;/*this stops the submenus from showing prior to the hover state. That is all li within the class 'active'*/
+		}
+		
+.active:hover li {
+		display: block;/*allows the submenu to show in the hover state as a block*/
+		}
+
+/*=content_container*/
+
+#content_container {
+		position:relative;
+		float:right;
+		width: 663px;
+		margin: 0 0 0 25px;
+		padding: 125px 20px 0 20px;/* 27px bottom padding is 0px so that the bottom padding can be added to the middle_container instead*/
+		}
+
+/*=<h1> heading*/
+
+h1 {
+		position: absolute; top:42px; left: -50px;/*relative to the content_container*/
+		width: 81%;
+		background: url(../images/h1_bg.png) no-repeat;
+		padding: .1em .5em;
+		font-size: 170%;
+		color: #014584;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		text-align:center;
+		}
+
+h1.width95 {
+		width: 95%;
+		background: url(../images/h1_bg_690.png) no-repeat;
+		}/*the width95 class is applied to the html for longer headings on specific pages*/
+
+/*=ogc copyright*/
+
+#ogc_copyright_statement {
+		clear:both;
+		text-align:right;
+		font-size: 0.8em;
+		padding-bottom: 2em;
+		}
+
+/*=advertisements*/
+
+/*=google ads*/
+
+/*the html mark up <script> tag may be commented out so that google can detect a maximum of 3 ads*/
+
+#google_top_ad {
+/*		display:none;*/
+		clear:both;
+		text-align:center;
+		margin:3em 0;
+		/*height:5em;*//*added to show up background color, remove before upload*/
+		/*background-color:#FF0000;*/
+		}
+
+#google_middle_ad {
+/*		display:none;*/
+		text-align:center;
+		margin: 3em 0;
+		/*background-color:#FF0000;*/
+		/*height:5em;*/
+		}
+
+#google_bottom_ad {
+/*		display:none;*/
+		text-align:center;
+		margin: 3em 0;
+		/*height:5em;*/
+		/*background-color:#FF0000;*/
+		}
+
+#google_ads_right {
+/*		display:none;*/
+		background-color:#f2ece5;
+		width: 120px;
+		height: 600px;
+		text-align:center;
+/*		position:absolute; top: 310px; right: -155px;*/
+		position:absolute; top: 145px; right: -155px;/*relative to the header_container, the next DIV up*/
+		padding:1em;
+		}
+
+
+/*=Content*/
+
+#project_management_content {
+		clear:both;
+		}
+
+/*=dropcap within the content*/
+#dropcap {
+		display: block;
+		float: left;
+		color: #999999;
+		padding: 0 .5em .2em 0;
+		margin: -.1em 0 0 0;
+/*		background:  #f2ece5;*/
+		font-family: "Times New Roman", Times, serif;
+		}
+
+#dropcap span {
+		line-height: .8em;
+		font-size: 8em;
+		}
+
+/*=<h2> headings within the content*/
+#project_management_content h2 {
+		display:block;
+		background: url(../images/h2_bg_owl_200.png);
+		background-repeat: no-repeat;
+		color: #d5dade;
+		width: 500px;
+		position: relative; left: -10px;
+		padding: .8em 0 .8em 1em;
+		font-weight:normal;
+		font-size:110%;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		}
+		
+#project_management_content h2.background250 {
+		display:block;
+		background: url(../images/h2_bg_owl_250.png);
+		background-repeat: no-repeat;
+		color: #d5dade;
+		width: 500px;
+		position: relative; left: -10px;
+		padding: .8em 0 .8em 1em;
+		font-weight:500;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		}
+
+/*extends the background immage for longer headings*/
+#project_management_content h2[class=background350] {
+		display:block;
+		background: url(../images/h2_bg_owl_350.png);
+		background-repeat: no-repeat;
+		color: #d5dade;
+		width: 500px;
+		position: relative; left: -10px;
+		padding: .8em 0 .8em 1em;
+		font-weight:500;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		}
+
+/*extends the background immage for longer headings*/
+#project_management_content h2[class=background450] {
+		display:block;
+		background: url(../images/h2_bg_owl_450.png);
+		background-repeat: no-repeat;
+		color: #d5dade;
+		width: 500px;
+		position: relative; left: -10px;
+		padding: .8em 0 .8em 1em;
+		font-weight:500;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		}
+
+
+/*=<h3> headings within the content*/
+#project_management_content h3 {
+		display:block;
+		color: #014584;
+		width: 90%;
+		position: relative; left: 5px;
+		padding: .1em 1em;
+		}
+
+/*applies a small amuount of padding to the first h3 to separate it from above items*/
+#project_management_content h3[class=top] {
+		padding-top: 1em;
+		}
+
+/*clears items below h3 to the left as necessary*/
+/*Applies to 'context' subheading in some prince2005 pages*/
+#project_management_content h3[class=context] {
+		clear:left;
+		}
+
+/*Applies to 'hints' sub heading in a few prince2005 pages*/
+#project_management_content h3[class=hints] {
+		color:#CC3366;
+		letter-spacing:0.2em;
+		}
+
+/*=<ul> unordered lists*/
+#project_management_content ul { 
+		padding: 1em 2em 1em 3em;
+		margin: 0 0 1em 0;
+		line-height: 1.5em;
+		color: #335a7b;
+		list-style-type: circle;
+		}
+
+/*=sublist applies styles for indented list within an unordered list*/
+#project_management_content ul.sub_list1 { 
+		padding: 1em 2em 1em 3em;
+		margin: 0 0 0.3em 0;
+		line-height: 1.8em;
+		color:#666633;
+		list-style-type:disc;
+		}/*applies a different style to the list with this class*/
+
+/*=<ol> ordered lists*/
+#project_management_content ol { 
+		padding: 0 2em 1em 4.5em;
+		margin: 0;
+		line-height: 1.5em;
+		color: #666633;
+		list-style-type:decimal;
+		}
+
+/*applies padding to move the list away from headinga above*/
+#project_management_content ol.top	{
+		padding-top:1em;
+		}
+
+/*=<b>*/
+/*highlighted style to specific words in bold*/
+#project_management_content b { 
+		color:#990033;
+		letter-spacing:.1em;
+		}
+
+/*=<i>*/
+/*highlighted style to specific words in italics*/
+#project_management_content i { 
+		display:block;
+		color:#996600;
+		width: 90%;
+		position: relative; left: 5px;
+		padding: .1em 1.5em;
+		letter-spacing:0.1em;
+		}/*highlighting something in italics for <i></i>*/
+
+/*applies a top padding to specific words in italics to move them away from above items*/
+#project_management_content i[class=top] {
+		padding-top:1em;
+		}
+
+
+/*=lists other attribute*/
+
+/*indents a list of items*/
+#project_management_content p.list {
+		padding-left:2em;
+		letter-spacing:.05em;
+		color:#993333;
+		font-size:0.9em;
+		}
+
+/*indent of a span within a list*/
+#project_management_content p.list span {
+		margin-left:5em;
+		color:#666666;
+		}
+
+/*1 page only in prince2005 for a definition with highlighted background in a <p> */
+#project_management_content p.plan_definition {
+		background-color:#FFFFCC;
+		padding:1em;
+		}/*not used in current site?*/
+
+/*1 page only in prince2005 for an arrow to the right in a horizontal list*/
+#project_management_content span.right_arrow {
+		color:#FF0000;
+		font-size:110%;
+		padding:0 .4em 0 .4em;/*top and bottom padding and margin don't register for this or <b>, not used in current site*/
+		}
+
+/*specific <ul> setting the style of list bullet point*/		
+li.letter {
+		list-style:lower-alpha;
+		}
+
+
+
+/*....SPECIFIC PAGES....*/
+
+
+/*----index pages----*/
+
+/*Applies to all index pages only*/
+div[class=index_1] {
+		text-align:center;
+		}
+
+/*Applies only to the index pages of prince2005 and 2009*/
+p[class=index_OGCtitle] {
+		letter-spacing: .1em;
+		color: #014584;
+		padding: 0.5em 0;
+		}
+
+/*Store index page only*/
+#index_page {
+		width:60%;
+		margin:0 auto;
+		margin-bottom:0.6em;
+		margin-top:1.5em;
+		}
+
+/*Store index page only*/
+#index_page p {
+		margin: 0 auto;
+		line-height: 1.5em;
+		font-size: 10px;
+		color:#999999;
+		text-align:center;
+		}
+
+/*contact us page*/
+
+div[class=contact_us] {
+		text-align:center;
+		margin-bottom:3em;
+		}
+
+div[class=contact_us] h3 {
+		text-align:left;
+		margin-bottom:2em;
+		}
+		
+div[class=contact_us] p.contact_us_1 {
+		text-align:left;
+		padding-left:3em;
+		margin-bottom:2em;
+		}
+
+
+div[class=spam] {
+		text-align:center;
+		margin:3em 0;
+		font-size:11px;
+		}
+
+div[class=spam] span {
+		color:#FF3333;
+		}
+
+div[class=contact_us] span {
+		color:#FF3333;
+		}
+
+div#sell {
+		display:none;/*hides the sell a product on our site*/
+		}
+
+
+/*privacy page*/
+
+
+div[class=privacy] {
+		text-align:center;
+		margin-bottom:3em;
+		}
+
+div[class=privacy] h3 {
+		text-align:left;
+		margin-bottom:2em;
+		}
+		
+div[class=privacy] p.privacy_1 {
+		text-align:left;
+		padding-left:3em;
+		margin-bottom:2em;
+		}
+
+div[class=privacy] h3.top {
+		margin-top:2em;
+		}
+
+
+/*about us page*/
+
+div[class=about_us] {
+/*		text-align:center;*/
+		text-align:left;
+		padding-left:3em;
+		margin-bottom:2em;
+
+		}
+
+
+/*site use page*/
+
+
+div[class=site_use] {
+		text-align:center;
+		margin-bottom:3em;
+		}
+
+div[class=site_use] h3 {
+		text-align:left;
+		margin-bottom:2em;
+		}
+		
+div[class=site_use] p.site_use_1 {
+		text-align:left;
+		padding-left:3em;
+		margin-bottom:2em;
+		}
+
+div[class=site_use] h3.top {
+		margin-top:2em;
+		}
+
+/*site map page*/
+
+/*sets heading for sitemap topic*/
+.site_map h2 {
+		display: block;
+		text-align:left;
+		background-image: none;
+/*		color: #014584;*/
+		color: #FF0000;
+		margin:0;
+		padding: 1em 1em;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight: 500;
+		letter-spacing: 0.5em;
+		}
+
+/*sets subtitle attributes within <p>*/
+.site_map #subtitle {
+		font-size:90%;
+		color:#333366;
+		margin:0;
+		padding:1em 1em 1em 2.5em;
+		letter-spacing: 0.3em;
+		}
+
+/*general <p> attributes*/
+.site_map p {
+		margin:0;
+		color:#666666;
+		padding: 0 1em 0 1em;		
+		}
+
+/*allows rollover information to be seen in the last <p> tag*/
+.site_map #last {
+		margin-bottom: 3em;
+		}
+
+
+/*=google ads display page google.shtml only*/
+
+/*This is for the internal Google ads page only. That is where Google searches are redirected on our site.*/
+
+
+/*contains the content div on google.shtml*/
+#middle_container_google {
+		position:relative;
+		width: 950px;
+		float:none;
+		clear:both;
+		overflow:auto;/*this allows the div to expand to fill the content as it would otherwise collapse with floated divs*/
+		}
+
+/*content div on google.shtml*/
+#content_container_google {
+		position:relative;		
+		float:right;
+		width: 910px;
+		margin: 0;
+		padding: 125px 20px 27px 20px;/*the bottom padding allows for the hover display of the 'other sites' information*/
+		}
+/*google.shtml h1 header*/
+h1.google {
+		position: absolute; top:42px; left: 200px;
+		width: 60%;
+		background: url(../images/h1_bg.png) no-repeat;
+		padding: .1em .5em;
+		font-size: 170%;
+		color: #014584;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		text-align:center;
+		}
+
+/*div containing the google search bar, google.shtml only*/
+div#cse-search-results	{
+		width:800px;
+		margin:auto;
+		}
+
+
+/*....TABLES....*/
+
+/*....general....*/
+
+/*=table*/
+
+caption {
+		font-family:"Courier New", Courier, monospace;
+		letter-spacing:0.3em;
+		padding:0 0 1em 0;
+		font-size:1.2em;
+		color:#666666;
+		}
+		
+table, th, td {
+		border: 1px solid #FFFFFF;
+		border-collapse:collapse;/*removes double borders around cells*/
+		padding:1em;
+		}
+
+table {
+		border:none;
+		width:100%;
+		margin-bottom:2em;
+		}
+
+th {
+		text-align:center;
+		font-weight:normal;
+		background-color:#CCCC66;
+		}
+
+th:hover {
+		text-align:center;
+		font-weight:normal;
+		background-color:#FFFFCC;
+		}
+
+td {
+		}
+
+tbody tr {
+		background-color:#CCCCCC;
+		color:#333333;
+		}
+
+tbody tr:hover {
+		background-color:#999999;
+		color:#FFFFCC;
+		}
+
+tbody td.cell_1 {
+		text-align:left;
+		}
+
+tbody td.cell_2 {
+		text-align:center;
+		}
+
+/*....Tables with cell highlights....*/
+
+tbody td.cell_A:hover, td.cell_B:hover, td.cell_C:hover, td.cell_D:hover {
+		background-color:#FFFFCC;
+		}
+
+tbody tr[class=row_A]:hover, tr[class=row_B]:hover, tr[class=row_C]:hover, tr[class=row_D]:hover {
+		background-color:#CCCC66;
+		color:#333333;
+		}
+
+tbody tr[class=row_A], tr[class=row_B], tr[class=row_C], tr[class=row_D] {
+		background-color:#CCCC66;
+		color:#333333;
+		text-align:center;
+		}
+
+
+/*=table specific*/
+
+/*....special table for duration and standard deviation data....*/
+
+/*sets general table attributes*/
+table.duration_1 {
+		width:80%;
+		margin:1em auto;
+		}
+
+/*sets general table header attributes*/
+table.duration_1 th {
+		background-color:#d5dade;
+		padding:0.2em;
+		}
+/*sets general table data cells attributes*/
+table.duration_1 td {
+		padding:0.2em;
+		}
+
+/*first row table header cells 1,2,5,6,7 as necessary*/
+table.duration_1 th.head_1 {
+		background-color:#F2ECE5;
+		border-left:0px;
+		border-top:0px;
+		}
+
+table.duration_1 th.head_5 {
+		border-bottom:0px;
+		}
+
+table.duration_1 th.head_6 {
+		border-bottom:0px;
+		}
+
+table.duration_1 th.head_7 {
+		background-color:#F2ECE5;
+		border-right:0px;
+		border-top:0px;
+		}
+
+/*second row table header cells A,B,C,D,E,F,G as necessary */
+table.duration_1 th.head_B {
+		background-color:#ffff99;
+		}
+
+table.duration_1 th.head_C {
+		background-color:#ffff99;
+		}
+
+table.duration_1 th.head_D {
+		background-color:#ffff99;
+		}
+		
+table.duration_1 th.head_E {
+		border-top:0px;
+		}
+
+table.duration_1 th.head_F {
+		border-top:0px;
+		}
+
+/*sets attributes for cells in the table body*/
+table.duration_1 tbody td.cell_B, td.cell_C, td.cell_D {
+		background-color:#CCCCB2;
+		}
+
+/*sets hover attributes for cells in the table body*/
+table.duration_1 tbody td.cell_A:hover, td.cell_B:hover, td.cell_C:hover, td.cell_D:hover, td.cell_E:hover, td.cell_F:hover, td.cell_G:hover {
+		background-color:#FFFFCC;
+		}/*td.cell_B:hover not working, not sure why*/
+
+/*sets attributes for cells in the table foot*/
+table.duration_1 tfoot td {
+		text-align:center;
+		padding:0.4em;
+		}
+
+table.duration_1 tfoot tr {
+		background-color:#cccc99;
+		}
+
+table.duration_1 tfoot tr:hover {
+		background-color:#ffffda;
+		}
+
+/*....specific for cell in 8 x 2 table....*/
+
+table.trigger td.cell_A_1 {
+		background-color:#CC9966;
+		}
+
+
+/*....Tables specific to index page....*/
+
+
+table[class=index_page_1]{
+		width:60%;
+		margin:0 auto;
+		}
+
+th[class=index_head_A] {
+		background-color:#99CC99;
+		}
+
+th[class=index_head_A]:hover {
+		background-color:#FFFF99;
+		}
+
+
+/*VIRTUAL TABLES*/
+
+/*=table virtual*/
+
+/*specific settings within mission statement questions*/
+/*left question*/
+
+span.mission_question_1 {
+		width: 180px;
+		display:inline-block;
+		margin-left:3em;
+		}
+
+/*middle example*/
+span.mission_question_2 {
+		width: 290px;
+		display:inline-block;
+		}
+
+/*yes, no, maybe table in exit strategy*/
+span.exit {
+		color:#006699;
+		width:45px;
+		display:inline-block;
+		}
+
+/*----virtual 4 x 3 column table using <span> within a <p>----*/
+
+span.percent {
+		display:inline-block;
+		width:100px;
+		}
+
+span.percent_2 {
+		display:inline-block;
+		width:100px;
+		}
+
+span.percent_3 {
+		display:inline-block;
+		width:70px;
+		}
+
+/*specific 2 x 3 virtual table within a <p> using span*/		
+p.score	{
+		display:inline-block;
+		width:20%;
+		padding:0;
+		margin:0;
+		margin-bottom:1em;
+		}	
+		
+span.score {
+		color:#990033;
+		}	
+
+
+/*NON PRINCE2 CONTENT*/
+ 
+/*....Used on Prince2 specific pages for non Prince2 content....*/
+
+#nonprince2[class=hide_non_prince2] {
+		display:none;
+		}
+
+#nonprince2 {
+		clear:both;
+		border-top: solid 5px #CCCCCC;
+		margin: 2em 0 0 0;
+		padding: 1em 1em;
+		background-color: #FFFFda;
+		}
+
+#nonprince2 h2 {
+		display: block;
+		width: 50%;
+		text-align: center;
+		background-image: none;
+		color: #014584;
+		margin: 0 auto;
+		padding: .1em 1em;
+		}
+
+#nonprince2 h3 {
+		display:block;
+		color:#CC3366;
+/*		color: #014584;*/
+		font-size:90%;
+		width: 70%;
+		position: relative; left: 5px;
+		padding: .1em 1em;
+		}
+
+#nonprince2 h3[class=top] {
+		padding-top: 1em;
+		}
+
+#nonprince2 h3[class=context] {
+		clear:left;
+		}
+
+
+/*PURCHASE PRODUCT LINK*/
+
+/*=purchase*/
+
+#purchase {
+		clear:both;
+		width: 40%;
+		margin: 2em auto 0 auto;
+		padding: .3em 0 0 0;
+		font-size: 90%;
+		background-color: #CCCCCC;
+		margin-top:4em;
+		border-bottom: solid 2px #014584;		
+		border-radius: 5px;/*css3 IE 9, firefox 4, chrome 5, safari 5, opera 10.5*/
+		}
+
+#purchase_prince {
+		clear:both;
+		width: 60%;
+		text-align: center;
+		margin: 0 auto;
+		padding: .5em 0;
+		font-size: 90%;
+		background-color: #CCCCCC;
+		margin-top:2em;
+		border-bottom: solid 2px #014584;		
+		border-radius: 5px;/*css3 IE 9, firefox 4, chrome 5, safari 5, opera 10.5*/
+		}
+
+#purchase h2 {
+		display: block;
+		width: 90%;
+		text-align: center;
+		background-image: none;
+/*		color: #014584;*/
+		margin: 0 auto;
+		padding: .1em 1em .25em 1em;
+		}
+
+#purchase h2 a {
+ 		color:#014584;
+		padding: 0 1em;
+		font-family:Georgia, "Times New Roman", Times, serif;
+		font-weight: normal;
+		letter-spacing: 0.1em;
+		}
+
+
+/*FOOTER*/
+
+/*=footer*/
+
+/*....march site links and information....*/
+
+/*....containing div for all site links....*/
+
+
+#footer_site_links {
+		clear:both;
+		position:relative;
+		float:left;
+		color: #FFFFFF;
+		font-size: 11px;
+		text-align:center;
+		width: 950px;
+		background-color:#CCCCCC;
+		padding:0.5em 0;
+		}
+
+#footer_site_links p {
+		margin: 0;
+		padding: 0;
+		letter-spacing: 0.1em;
+		padding-bottom: 0.5em;	
+		}
+
+/*=site_links*/
+
+/*....Code for the other topic links within div with ID = site_links_1....*/
+
+/*links as an unordered list*/
+#footer_site_links #site_links_1 ul {
+		list-style-type: none;/*removes any bullets*/
+		margin: 0;
+		}
+
+#footer_site_links #site_links_1 ul li {
+		display:inline;/*changes from vertical to horizontal list*/
+		}
+/*links within Li*/
+#footer_site_links #site_links_1 ul li a {
+		color:#014584;
+		border-right: solid 1px #014584;/*adds right border separator*/
+		padding: 0 1em;
+		}
+
+/*this makes sure that the information between the <span> tags is not seen in the non hover state*/
+#footer_site_links #site_links_1 a span {
+		display: none;
+		}
+
+/*this makes sure that the information between the <span> tags is seen in the hover state*/
+#footer_site_links #site_links_1 a:hover span {
+		display: block;/*makes the information visible*/
+		width: 950px;
+		height: 55px;
+		background-color: #FFFFFF;
+		color: #000000;
+		font-size: 10px;
+		position: absolute; top: -60px; right: 0;/*relative to the footer_site_links DIV*/
+		margin:0;
+		padding-top: 10px;
+		padding-bottom:10px;
+		letter-spacing: 0.2em;		
+		line-height: 1.3em;
+		text-align: center;
+		}
+
+/*removes the right hand border on the last link*/
+#footer_site_links #site_links_1 ul li #site_last_link {
+		/*border-right:none*/;
+		}
+
+#footer_site_links .motivation_link {
+		border-right:none !important;/*!important needed as lower specificity to above*/
+		}
+
+#footer_site_links .leadership_link {
+		/*border-right:none !important;*//*important needed as lower specificity to above*/
+		}
+
+/*----template for hiding links and removing the previous right border----*/
+
+#footer_site_links .problem_solving_link {
+		display:none;/*prevents display at the moment*/
+		}
+
+#footer_site_links .motivation_link {
+		/*display:none*/;
+		}
+
+
+/*----Code for the other topic links within div with ID = site_links_2----*/
+/*This is for extra topic links below the current when needed*/
+
+#footer_site_links #site_links_2 {
+		margin-top:1em;
+		display:none;/*currently deactivated*/
+		}
+
+#footer_site_links #site_links_2 p {
+		margin: 0;
+		padding: 0;
+		letter-spacing: 0.2em;
+		padding-bottom: 0.5em;	
+		}
+
+#footer_site_links #site_links_2 ul {
+		list-style-type: none;
+		margin: 0;
+		}
+
+#footer_site_links #site_links_2 ul li {
+		display:inline;
+		}
+
+#footer_site_links #site_links_2 ul li a {
+		color:#014584;
+		border-right: solid 1px #014584;
+		padding: 0 1em;
+		}
+
+#footer_site_links #site_links_2 a span {
+		display: none;
+		}
+
+#footer_site_links #site_links_2 a:hover span {
+		display: block;
+		width: 950px;
+		height: 55px;
+		background-color: #FFFFFF;
+		color: #000000;
+		font-size: 10px;
+		position: absolute; top: -60px; right: 0;
+		margin:0;
+		padding-top: 5px;
+		letter-spacing: 0.2em;		
+		line-height: 1.3em;
+		text-align: center;
+		}
+
+
+#footer_site_links #site_links_2 ul li #site_last_link {
+		border-right:none;
+		}
+
+
+/*=OGC official site statement*/
+
+/*----OGC official site statement only for Prince2 pages----*/
+
+#footer_OGC_official_sites {
+		float:left;
+		text-align:center;
+		width: 950px;
+		background-color: #eaecee;
+		padding:0.5em 0;
+		}
+
+#footer_OGC_official_sites #ogc_brand_statement {
+		margin: 0;
+		padding: 0;
+		color: #999999;
+		font-size: 10px;
+		}
+
+#footer_OGC_official_sites ul {
+		list-style-type: none;
+		margin: 0;
+		}
+
+#footer_OGC_official_sites ul li {
+		display:inline;
+		}
+
+#footer_OGC_official_sites ul li a {
+		border-right: solid 1px #FFFFFF;
+		padding: 0 1em;
+		font-size: 11px;
+		}
+
+#footer_OGC_official_sites ul li #ogc_last_link {
+		border-right:none;
+		}
+
+/*=OGC statement*/
+
+/*----OGC statement only for Prince2 sites----*/
+
+#footer_OGC_statement{
+		clear:both;/*necessary as above div floated*/
+		margin: 0;
+		text-align:center;
+		width: 100%;
+		background-color:#eaecee;
+		}
+
+#footer_OGC_statement p {
+		margin: 0;
+		line-height: 1.5em;
+		font-size: 10px;
+		color:#999999;
+		}
+
+#footer_OGC_statement #OGCtitle {
+		letter-spacing: .1em;
+		color: #014584;
+		padding: 0.5em 0;
+		}
+
+
+/*=march copyright*/
+/*....March copyright statement and lower_menu within the footer_march div....*/
+
+#footer_march {
+		padding: 0.5em 0;
+		background-color:#6d89b4;
+		overflow:auto;
+		clear:both;
+		}
+
+/*----march copyright statement----*/
+#march_copyright {
+		clear:both;
+		float:left;
+		font-size: 10px;
+		width: 50%; /*fills the existing footer width*/
+		height: 19px;
+		text-align: center; /*this aligns the text center in the block p tag*/
+		margin: 0 auto; /*this aligns the div block center for any width, not needed if 100%*/
+		background-color:#6d89b4;
+		color:#e5eadd;
+		}
+
+#march_copyright p {
+		margin: 0;
+		}
+
+/*=lower_menu*/
+
+#lower_menu {
+		float: left;
+		width: 42%;
+		font-size: 10px;
+		margin: 0 auto;
+		padding-left: 8%;
+		background-color:#6d89b4;
+		}
+
+#lower_menu ul {
+		list-style-type: none;
+		padding: .15em 0 0 0;
+		margin: 0 auto;
+		}
+
+#lower_menu ul li {
+		display: inline;
+		}
+
+
+#lower_menu ul li a {
+		padding: .2em .7em;
+ 		color:#e5eadd;
+		border-right: solid 1px #e5eadd;
+		float: left;
+		}
+
+#lower_menu a:hover {
+		color: #6d89b4;
+		background-color: #e5eadd;
+		text-decoration: none;
+		}
+
+#lower_menu ul li #lower_menu_last {
+		border-right:none;
+		}
+
+
+/*=images*/
+
+/*....images floated right for specific sites....*/
+
+#project_management_content #image1 {
+		position:relative;
+		}
+
+a.image {
+		display:block;
+		cursor:default;
+		text-decoration:none;
+		float:right;
+		margin: 20px 0 0px 20px;/*bottom made 0 instead of 20px to help paragraphs float round neater*/
+		}
+
+a.image img {
+		display:block;
+		border:0;		
+		}
+
+a.image b {
+		display:none;
+		}
+
+a.image:hover b {
+		display:block;
+		cursor:default;
+		position: absolute; top: 0px; right: 0px;
+		z-index:100;
+		}
+
+#project_management_content p.image_copyright {
+		display:block;
+		position: absolute; top: -5px; right: 0px;
+		text-align:center;
+		font-size: .5em;
+		margin:0;
+		padding:1em 0 1em 1em;
+		}  
+
+#project_management_content p.image_copyright[id=middle] {
+		display:block;
+		position: absolute; top: -5px; right: 105px;
+		text-align:center;
+		font-size: .5em;
+		margin:0;
+		padding:1em 0 1em 1em;
+		}  
+
+/*....images aligned center....*/
+
+#project_management_content #image_center {
+		position:relative;
+		clear:both;
+		}
+
+a.image_center {
+		display:block;
+		width:60%;
+		text-decoration:none;
+		margin: 20px auto;
+		}
+
+a.image_center img {
+		display:block;/*allows all the image to be active*/
+		border:0;
+		margin:0 auto;		
+		}
+
+/*when present, stops the large image being displayed until hover state*/
+a.image_center b {
+		display:none;
+		}
+
+/*when present, allows the large image to be displayed in the hover state*/
+a.image_center:hover b {
+		display:block;
+		position: absolute; top: 0px; left:-19px; /*right: 0px;*/
+		z-index:100;
+		}
+
+/*Displays any image in the center of the page*/
+img {
+		display:block;
+		border:0;
+		margin:0 auto;		
+		}
+
+
+/*....images aligned left for specific sites....*/
+
+/*used when two images are left and right of each other. The first is image_left and the second is image_left_2*/
+
+/*first image to the left*/
+
+#image_left {
+		position:relative;
+		width:50%;
+		float:left;
+		}
+
+/*second image to the right*/
+#image_left_2 {
+		position:relative;
+		width:50%;
+		float:right;
+		}
+
+
+a.image_left {
+		width:30%;
+		text-decoration:none;
+		margin: 20px auto;
+		}
+
+
+a.image_left img {
+/*		display:block;*/
+		border:0;
+		margin:20px auto;		
+		}
+
+/*....On specific sites....*/
+
+/*© Crown copyright 2005 statement in a couple of prince2005 pages*/
+/*and many in prince2009. These are above images of diagrams.*/
+#project_management_content p.image_copyright_center {
+		display:block;
+		width:50%;
+		font-size: .5em;
+		text-align:center;
+		margin:0 auto;
+		padding:1em 0 0 0;
+		}  
+
+/*specific for this image*/
+
+img.elapsed_time {
+		display:block;
+		margin: 20px auto;
+		}
+		
+/*separate pages for Prince2 trademark statement*/
+
+/*=trademark*/
+p.trademark {
+		text-align:center;
+		font-size:9px;
+		color:#666666;
+		margin-top:2em;
+		}
+
+/*=definitions*/
+
+/*....strategy bold top for definitions....*/
+
+b.strategy_top {
+		display:block;
+		margin-top:2em;
+		}
+
+/*sets background colour to differentiate definitions in a <p>*/
+		
+p.definition {
+		background-color:#FFFFCC;
+		padding:1em;
+		}
+
+
+/*=sub headings*/
+
+/*....selecting a strategy <i>....*/
+
+/*italic sub heading*/
+
+i.top {
+		margin-top:0.5em;
+		}
+
+/*<h4> sub heading*/
+
+h4		{
+		color:#990033;
+		letter-spacing:.1em;
+		position: relative; left: 5px;
+		padding: .1em 1.5em;
+		padding-top:2em;
+		}
+
+/*Applies to only a couple of pages on prince2009*/
+h4.no_padding		{
+		color:#CC9933;
+		letter-spacing:.1em;
+		position: relative; left: 5px;
+		padding: 1em 1.5em;
+		}
+
+/*Applies to a few pages on prince2009*/
+h4.no_padding_2		{
+		color:#990033;
+		letter-spacing:.1em;
+		position: relative; left: 5px;
+		padding: 1em 1.5em;
+		}
+
+		
+
+
+/*QUOTATIONS*/
+/*=quotes*/
+
+/*....Quotations and other tabular statements....*/
+
+/*specific bold settings within Alice quotation*/
+b.alice {
+		width: 50px;
+		display:inline-block;
+		}
+
+/*general attributes for the whole quote and centering*/
+div.quote {
+		width:60%;
+		margin: 2em auto 0.5em auto;
+		text-align:left;
+		color:#CC3333;
+		padding-left:2em;
+		}
+
+				
+/*general attributes for the reference below the quote*/
+div.quote_ref {
+		width:60%;
+		margin: 0em auto;
+		text-align:left;
+		color:#000000;
+		padding-left:2em;
+		}
+		
+/*Quotations for the index page*/
+
+div.main_quote {
+		width:60%;
+		margin: 2em auto 0.5em auto;
+		text-align:center;
+		color:#CC3333;
+/*		padding-left:2em;*/
+		}
+		
+
+div.main_quote_ref {
+		width:60%;
+		margin: 0em auto;
+		text-align:center;
+		color:#000000;
+		}
+
+div.main_quote_ref span.person {
+		color:#0000CC;
+		}
+
+div.main_quote_ref span.title {
+		color:#0000CC;
+		}
+
+div.main_quote_ref span.chapter {
+		color: #990033;
+		}
+
+
+div.main_quote_author {
+		width:60%;
+		margin: 0em auto;
+		text-align:center;
+		color:#000000;
+		}
+
+
+
+
+
+/*added this to adjust the size*/

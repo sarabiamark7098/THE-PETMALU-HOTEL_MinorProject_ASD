@@ -1,4 +1,4 @@
-<?php
+    <?php
     session_start();
 
     include 'connection.php';
@@ -8,9 +8,21 @@
     $check_in = $_SESSION['check_in'];
     $check_out = $_SESSION['check_out'];
     $room_no = $_SESSION['room_no'];
+    $firstname = $_SESSION['firstname'];
+    $lastname = $_SESSION['lastname'];
+    $middleI = $_SESSION['middleI'];
+    $address = $_SESSION['address'];
+    $contact_no = $_SESSION['contact_no'];
+    $email_add = $_SESSION['email_add'];
+    $mail = $_SESSION['mail'];
+    $card_holder_name = $_SESSION['card_holder_name'];
+    $card_number = $_SESSION['card_number'];
+    $card_code = $_SESSION['card_code'];
+    $payment_method = $_SESSION['payment_method'];
+
     $date_no = 0;
     
-    if(isset($_GET['guest-submit'])) {
+    if(isset($_GET['submit'])) {
 
         $queryGetHotelId = "SELECT hotel_id FROM hotel";
         echo $queryGetHotelId."<br>";
@@ -36,6 +48,10 @@
                $date_no = $row['date_no'];
             }
             echo $date_no."<br >";
+
+           if($resultInsertDate && $resultGetDateNo) {
+               $success = true;
+           }
         }
 
         if(isset($room_no)) {
@@ -50,45 +66,35 @@
             $queryInsertDateAvail .= "VALUES ";
             $queryInsertDateAvail .= "($date_no, $room_no)";
             $resultInsertDateAvail = mysqli_query($connection, $queryInsertDateAvail);
+
+            if($resultUpdateRoomAvail && $resultInsertDateAvail) {
+                $success = true;
+            }
         }
 
-        if(isset($_GET['firstname'])){
-            $firstname = $_GET['firstname'];
-            $success = true;
-        }
-        if(isset($_GET['lastname'])){
-            $lastname = $_GET['lastname'];
-            $success = true;
+        if(isset($card_holder_name) && isset($card_number) && isset($card_code) && isset($payment_method)) {
+            $queryInsertPayment  = "INSERT INTO payment (card_holder_name, card_number, card_code, payment_method, status) ";
+            $queryInsertPayment .= "VALUES ";
+            $queryInsertPayment .= "('". $card_holder_name ."' , '". $card_number ."', '". $card_code ."', '". $payment_method ."', 'PENDING')";
+            $resultInsertPayment = mysqli_query($connection, $queryInsertPayment);
+            echo $queryInsertPayment."<br>";
+
+            $queryGetPaymentNo = "SELECT payment_no FROM payment";
+            $queryGetPaymentNo."<br>";
+            $resultGetPaymentNo = mysqli_query($connection, $queryGetPaymentNo);
+            while($row = mysqli_fetch_assoc($resultGetPaymentNo)) {
+                $payment_no = $row['payment_no'];
+            }
+            echo $payment_no."<br>";
+
+            if($resultInsertPayment && $resultGetPaymentNo) {
+                $success = true;
+            }
         }
 
-        if(isset($_GET['middleI'])){
-            $middleI = $_GET['middleI'];
-            $success = true;
-        }
-
-        if(isset($_GET['address'])){
-            $address = $_GET['address'];
-            $success = true;
-        }
-
-        if(isset($_GET['contact_no'])){
-            $contact_no = $_GET['contact_no'];
-            $success = true;
-        }
-
-        if(isset($_GET['email_add'])){
-            $email_add = $_GET['email_add'];
-            $success = true;
-        }
-
-        if(isset($_GET['mail'])){
-            $mail = $_GET['mail'];
-            $success = true;
-        }
-
-        if($success) {
-            $queryInsertGuest  = "INSERT INTO guest (firstname, lastname, middle_Initial, address, contact_no, email_address, mail) "; 
-            $queryInsertGuest .= "VALUES ('".$firstname."', '".$lastname."', '".$middleI."', '".$address."', '".$contact_no."', '".$email_add."', '".$mail."')";
+        if(isset($firstname) && isset($lastname) && isset($middleI) && isset($address) && isset($contact_no) && isset($email_add) && isset($mail) && isset($payment_no)) {
+            $queryInsertGuest  = "INSERT INTO guest (firstname, lastname, middle_Initial, address, contact_no, email_address, mail, payment_no) "; 
+            $queryInsertGuest .= "VALUES ('".$firstname."', '".$lastname."', '".$middleI."', '".$address."', '".$contact_no."', '".$email_add."', '".$mail."', ". $payment_no .")";
             echo $queryInsertGuest."<br>";
             $resultInsertGuest = mysqli_query($connection, $queryInsertGuest);
 
@@ -98,7 +104,11 @@
             while($row = mysqli_fetch_assoc($resultGetGuestId)) {
                 $guest_id = $row['guest_id'];
             }
-            echo $guest_id."<br>";
+            echo $guest_id."<br>";   
+
+            if($resultInsertGuest && $resultGetGuestId) {
+                $success = true;
+            }
         }
 
         if(isset($date_no) && isset($room_no) && isset($guest_id) && isset($hotel_id)) {
@@ -107,8 +117,29 @@
             $queryInsetBooking .= "(".$room_no.", ".$hotel_id.", ".$date_no.", ".$guest_id.", 0)";
             echo $queryInsetBooking."<br>";
             $resultInsertBooking = mysqli_query($connection, $queryInsetBooking);
+
+            if($resultInsertBooking) {
+                $success = true;
+            }
         }
 
+        if($success === true) {
+            header("Location: submit.php");
+            unset($_SESSION['check_in']);
+            unset($_SESSION['check_out']);
+            unset($_SESSION['room_no']);
+            unset($_SESSION['firstname']);
+            unset($_SESSION['lastname']);
+            unset($_SESSION['middleI']);
+            unset($_SESSION['address']);
+            unset($_SESSION['contact']);
+            unset($_SESSION['email_add']);
+            unset($_SESSION['mail']);
+            unset($_SESSION['card_holder_name']);
+            unset($_SESSION['card_number']);
+            unset($_SESSION['card_code']);
+            unset($_SESSION['payment_method']);
+        }
     }
 
     function test_input($data) {

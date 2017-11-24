@@ -1,6 +1,18 @@
 <?php include 'connection.php'?>
 
 <?php
+
+    session_start();
+
+    $super_user = $_SESSION['super_user'];
+    $super_pass = $_SESSION['super_pass'];
+
+    if($super_user === 'temp' && $super_pass === 'temp'){
+        $user_manage = "";
+    }elseif($super_user === 'admin' && $super_pass === 'superadmin1234') {
+        $user_manage = "<a href='user_manage.php'><img src='images/Manager_48px.png' alt='Home' style='float: left; width: 24px; height: 24px;'>Management</a>";
+    }
+
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -36,7 +48,8 @@
                     <li><a href="booking.php"><img src="images/Booking_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Bookings</a></li>
                     <li><a href="confirmation.php"><img src="images/Checked_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Confirmation</a></li>
                     <li><a href="room.php"><img src="images/Room_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Room</a></li>
-                    <li><a href=""><img src="images/Logout Rounded Up_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Logout</a></li>
+                    <li><?php echo $user_manage;?></li>
+                    <li><a href="logout.php" onclick="return confirm('Are you sure?');"><img src="images/Logout Rounded Up_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Logout</a></li>
                 </ul>
                 </center>
             </div>
@@ -55,7 +68,6 @@
                                     <th style="font-size: 13px;">Room Type</th>
                                     <th style="font-size: 13px;">Picture</th>
                                     <th style="font-size: 13px;">Price</th>
-                                    <th style="font-size: 13px;">Availability</th>
                                     <th style="font-size: 13px;">Action</th>
                                 </tr>
                             </thead>
@@ -66,7 +78,7 @@
                                     //Table 
                                     // 2. Perform database query
 
-                                    $query = "SELECT a.`room_no`, c.`type_name`, c.`image_data`, c.`price`, d.`avail`
+                                    $query = "SELECT a.`room_no`, c.`type_name`, c.`image_data`, c.`price`
                                     FROM 
                                     `room` a, 
                                     `room_type` b, 
@@ -75,7 +87,7 @@
                                     WHERE 
                                     a.`room_no` = b.`room_no` AND
                                     b.`type_no` = c.`type_no` AND
-                                    a.`room_no` = d.`room_no` ORDER BY a.`room_no` ASC";
+                                    a.`room_no` = d.`room_no` ORDER BY a.`room_no` DESC";
 
                                     $result = mysqli_query($connection, $query);
 
@@ -91,7 +103,6 @@
                                         <td style='font-size: 12px;'>". $row['type_name'] ."</td>
                                         <td style='font-size: 12px;'><img width='100' height='100' src='data:image;base64,". $row['image_data'] ."'></td>
                                         <td style='font-size: 12px;'>". $row['price'] ."</td>
-                                        <td style='font-size: 12px;'>" . $row['avail'] . "</td>
                                         <td>
                                         <a href='delete_room.php?room_no={$row['room_no']}&type_name={$row['type_name']}'>
                                         <img src='images/Delete_48px.png' style='width: 20px; height: 20px;'></a>
@@ -113,8 +124,3 @@
     </div>
 </body>
 </html>
-
-<?php
-    // 5. Close database connection
-    mysqli_close($connection);
-?>

@@ -1,33 +1,22 @@
 <?php
-    // 1. Create a database connection
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "asdminorproject";
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
+    include 'connection.php';
 
-    // Test if connection occurred. 
-    if(mysqli_connect_errno()) {
-        die("Database connection failed: " . 
-            mysqli_connect_error() . 
-            " (" . mysqli_connect_errno() . ")"
-        );
+    session_start();
+
+    $super_user = $_SESSION['super_user'];
+    $super_pass = $_SESSION['super_pass'];
+
+    if($super_user === 'temp' && $super_pass === 'temp'){
+        $user_manage = "";
+    }elseif($super_user === 'admin' && $super_pass === 'superadmin1234') {
+        $user_manage = "<a href='user_manage.php'><img src='images/Manager_48px.png' alt='Home' style='float: left; width: 24px; height: 24px;'>Management</a>";
     }
 ?>
 
 <?php
-    // 2. Perform database query
-    $query = "SELECT * FROM admin WHERE user_id = '1'";
-    $result = mysqli_query($connection, $query);
 
-    if(!$result) {
-        die("Database query failed.");
-    }
+    $user_id = $_SESSION['user_id'];
 
-?>
-
-<?php
-    //codes from w3schools
     $username = $usernameError = "";
     $password = $passwordError = "";
 
@@ -43,6 +32,14 @@
         }else {
             $password = test_input($_POST["password"]);
         }
+    }
+
+    $queryGetImage = "SELECT * FROM admin WHERE user_id = $user_id";
+    $resultGetImage = mysqli_query($connection, $queryGetImage);
+    while($row = mysqli_fetch_assoc($resultGetImage)){
+        $image = $row['image_data'];
+        $name = $row['admin_name'];
+
     }
 
     function test_input($data) {
@@ -65,24 +62,6 @@
     <link rel="stylesheet" href="stylesheets/bootstrap-theme.min.css">
 </head>
 <body>
-    <?php
-    //3. Use return data (if any)
-
-    $user = "";
-    $pass = "";
-
-    while($row = mysqli_fetch_assoc($result)) {
-        //output data from each row
-        $user = $row["username"];
-        $pass = $row["password"];
-    }
-
-    if($username === $user && $password === $pass) {
-        header("Location: confirmation.php");
-    }else {
-    }
-
-    ?>
     
     <div id="header" class="col-sm-12">
         <div class="container-fluid">
@@ -98,7 +77,8 @@
                     <li><a href="booking.php"><img src="images/Booking_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Bookings</a></li>
                     <li><a href="confirmation.php"><img src="images/Checked_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Confirmation</a></li>
                     <li><a href="room.php"><img src="images/Room_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Room</a></li>
-                    <li><a href=""><img src="images/Logout Rounded Up_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Logout</a></li>
+                    <li><?php echo $user_manage;?></li>
+                    <li><a href="logout.php" onclick="return confirm('Are you sure?');"><img src="images/Logout Rounded Up_48px.png" alt="Home" style='float: left; width: 24px; height: 24px;'>Logout</a></li>
                 </ul>
                 </center>
             </div>
@@ -106,19 +86,11 @@
     </div>
     <div id="content" class="col-sm-10">
         <div class="container-fluid">
-            
+            <h2>Welcome!</h2>
+            <h3><?php echo $name;?></h3>
+            <?php echo "<img width='400' height='300' src='data:image;base64,". $image ."'>";?>
         </div>
     </div>
 
-    <?php
-        //4. Release returned data
-        mysqli_free_result($result);
-    ?>
-
 </body>
 </html>
-
-<?php
-    // 5. Close database connection
-    mysqli_close($connection);
-?>

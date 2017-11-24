@@ -1,35 +1,16 @@
-<?php
-    // 1. Create a database connection
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "asdminorproject";
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass,  $dbname);
+    <?php
 
-    // Test if connection occurred. 
-    if(mysqli_connect_errno()) {
-        die("Database connection failed: " . 
-            mysqli_connect_error() . 
-            " (" . mysqli_connect_errno() . ")"
-        );
+    include 'connection.php';
+    session_start();
+
+    $username = $user = $usernameError = "";
+    $password = $pass = $passwordError = "";
+
+    if(isset($_GET['in'])) {
+        echo "<script type='text/javascript'>
+        window.alert('Invalid Username and Password')
+        </script>";
     }
-?>
-
-<?php
-    // 2. Perform database query
-    $query = "SELECT * FROM admin WHERE user_id = '1'";
-    $result = mysqli_query($connection, $query);
-
-    if(!$result) {
-        die("Database query failed.");
-    }
-
-?>
-
-<?php
-    //codes from w3schools
-    $username = $usernameError = "";
-    $password = $passwordError = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         if(empty($_POST["username"])) {
@@ -43,6 +24,48 @@
         }else {
             $password = test_input($_POST["password"]);
         }
+
+        $query = "SELECT * FROM admin WHERE username='{$username}' AND password='{$password}' AND hotel_id = 101";
+        $result = mysqli_query($connection, $query);
+        while($row = mysqli_fetch_assoc($result)) {
+            $user = $row['username'];
+            $pass = $row['password'];
+            $user_id = $row['user_id'];
+            $name = $row['admin_name'];
+        }
+        
+        if(!$result) {
+            die("Database query failed.");
+        }
+
+        $_SESSION['user_id'] = $user_id;
+        $_SESSION['admin_name'] = $name;
+        header("Location: home.php");
+    }  
+    
+    if($username === "admin" && $password === "superadmin1234") {
+        $super_user = $username;
+        $_SESSION['super_user'] = $super_user;
+        
+        $super_pass = $password;
+        $_SESSION['super_pass'] = $super_pass;
+        header("Location: home.php");
+    }elseif($username !== $user && !$password !== $pass) {
+        header("Location: index.php?in=invalid");
+    }elseif($username === $user && $password === $pass) {
+        $super_user = "temp";
+        $_SESSION['super_user'] = $super_user;
+        
+        $super_pass = "temp";
+        $_SESSION['super_pass'] = $super_pass;
+    }elseif(isset($_GET['success'])){
+        echo "<script type='text/javascript'>
+        window.alert('Successfully Logout')
+        </script>";
+    }else {
+        echo "<script type='text/javascript'>
+        window.alert('Invalid User')
+        </script>";
     }
 
     function test_input($data) {
@@ -65,24 +88,6 @@
     <link rel="stylesheet" href="stylesheets/bootstrap-theme.min.css">
 </head>
 <body>
-    <?php
-    //3. Use return data (if any)
-
-    $user = "";
-    $pass = "";
-
-    while($row = mysqli_fetch_assoc($result)) {
-        //output data from each row
-        $user = $row["username"];
-        $pass = $row["password"];
-    }
-
-    if($username === $user && $password === $pass) {
-        header("Location: home.php");
-    }else {
-    }
-
-    ?>
     <div id="header" class="col-sm-12">
         <div class="container-fluid">
             <h1>The <span id="highlight-header">PETMALU</span> Hotel Admin</h1>
@@ -108,16 +113,8 @@
             </form>
         </div>
     </div>
-
-    <?php
-        //4. Release returned data
+    <?php        
         mysqli_free_result($result);
     ?>
-
 </body>
 </html>
-
-<?php
-    // 5. Close database connection
-    mysqli_close($connection);
-?>
